@@ -1,0 +1,21 @@
+
+<%  pages = Contentful.Delivery.entries(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"), %{"content_type" => "chronopage", "query" => @messenger} ) 
+	content = Enum.at(pages, 0)
+%>
+
+<%= if content != nil do %> 
+<h2><%= content["fields"]["title"] %> </h2>
+<div class="jumbotron">
+	<%= case Earmark.as_html(content["fields"]["body"]) do
+		{:ok, output, []} ->
+			raw(output)
+			{:error, output, error_messages} ->
+				IO.puts error_messages
+			end
+			%>
+
+
+</div>
+<% else %>
+  <h2> Page not found </h2>
+<% end %>

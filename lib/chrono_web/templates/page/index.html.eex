@@ -1,0 +1,10 @@
+<div class="jumbotron">
+  <h2><%= gettext "Welcome to %{name}!", name: "Chrono" %></h2>
+  <p class="lead">           
+          <%= if @conn.assigns[:user] do %>
+        <li class="menu-text">
+          Welcome, <%= @conn.assigns.user.first_name %>!
+        </li>
+      <% end %>
+  </div>
+

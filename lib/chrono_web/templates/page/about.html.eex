@@ -1,0 +1,14 @@
+
+<% content = Contentful.Delivery.entry(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"),  "5o68EBRcY0QE4OMWiYmeiE" ) %>
+<h2><%= content["fields"]["title"] %> </h2>
+<div class="jumbotron">
+	<%= case Earmark.as_html(content["fields"]["body"]) do
+		{:ok, output, []} ->
+			raw(output)
+			{:error, output, error_messages} ->
+				IO.puts error_messages
+			end
+			%>
+
+
+		</div>

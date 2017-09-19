@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Chrono-</title>
+  <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+</head>
+
+
+
+<body>
+  <div class='container'>
+   <div class='row'>
+   <div class='col'>
+      <nav class="navbar navbar-fixed-top navbar-inverse">
+        <ul class="nav navbar-nav">
+          <li><a href="/diary"> Watch Diary</a></li>
+          <li><a href="/gallery/all">Watch Gallery</a></li>
+          <% pages = Contentful.Delivery.entries(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"), %{"content_type" => "chronopage"} ) %>
+          <%= for page <- pages do %>
+          <li><a href="<%="/page/"<>page["fields"]["title"]%>"><%= page["fields"]["title"]%></a></li>
+          <% end %>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <%= if @conn.assigns[:user] do %>
+          <li><a href="/account">Signed in as <%= @conn.assigns.user.first_name %></a></li>
+          <li> <%= link "Sign out  ", to: auth_path(@conn, :delete), class: "button" %> </li>
+          <% else %>
+          <li> <%= link "Sign in with Google ", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %></li>
+          <% end %>
+
+        </ul>
+      </nav>
+    </div>
+
+
+    <div class='row'>
+     <div class='col'>
+      <header class="header">
+        <span class="logo"></span>
+      </header>
+    </div>
+  </div>
+
+</div>
+
+
+
+<p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+<p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+
+<main role="main">
+  <%= render @view_module, @view_template, assigns %>
+</main>
+
+</div> <!-- /container -->
+<script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+</body>
+</html>

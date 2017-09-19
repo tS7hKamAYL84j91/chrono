@@ -1,0 +1,29 @@
+<h2>Watch Gallery </h2>
+<div class="jumbotron">
+	<div class="container">
+		<div class="row">
+			<% count = 4 %> 
+			<table class"table table-hover table-responsive table-borderless">
+				<%= if count > 3 do %>
+					<tr>
+				<% end %>
+				<%=	for item <- getwatches() do %>
+				<td>
+				<% count = count + 1 %>
+				<a href="/gallery/<%=item["fields"]["name"]%>">
+				<p><%= item["fields"]["name"] %></p>
+				<%= for photo <- item["fields"]["photos"] do %>
+				<img src="<%= photo["fields"]["file"]["url"] %>" alt="<%= photo["fields"]["title"]%>"  height="150" width="150">
+				<% end %>
+				</a>
+				<p><%= item["fields"]["description"] %></p>
+				</td>
+				<% end %>
+				<%= if count > 3 do %>
+					</tr>
+					<% count == 0 %>
+				<% end %>
+			</table>
+		</div>
+	</div>
+</div>
