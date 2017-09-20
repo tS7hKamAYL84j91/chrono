@@ -1,4 +1,6 @@
 # Chrono
+App for shared ownership of watches
+
 
 To start your Phoenix server:
 
