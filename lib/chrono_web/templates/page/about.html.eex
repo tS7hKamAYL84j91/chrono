@@ -9,6 +9,4 @@
 				IO.puts error_messages
 			end
 			%>
-
-
-		</div>
+</div>

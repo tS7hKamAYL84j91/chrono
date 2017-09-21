@@ -17,3 +17,5 @@ config :chrono, Chrono.Repo,
   database: "chrono_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+  import_config "dev.secret.exs"
