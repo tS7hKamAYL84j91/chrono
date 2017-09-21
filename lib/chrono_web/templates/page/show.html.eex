@@ -1,5 +1,5 @@
 
-<%  pages = Contentful.Delivery.entries(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"), %{"content_type" => "chronopage", "query" => @messenger} ) 
+<%  pages = Contentful.Delivery.entries(Application.get_env(:chrono,:contentful_space), Application.get_env(:chrono,:contentful_key), %{"content_type" => "chronopage", "query" => @messenger} ) 
 	content = Enum.at(pages, 0)
 %>
 

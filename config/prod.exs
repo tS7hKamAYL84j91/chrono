@@ -30,6 +30,11 @@ config :chrono, Chrono.Repo,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
   ssl: true
 
+config :chrono,
+  contentful_key: System.get_env("ACCESS_TOKEN"),
+  contentful_space: System.get_env("SPACE_ID")
+
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key

@@ -1,5 +1,5 @@
 
-<% content = Contentful.Delivery.entry(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"),  "73RQf0xKeIY2uu68ueOsm6" ) %>
+<% content = Contentful.Delivery.entry(Application.get_env(:chrono,:contentful_space), Application.get_env(:chrono,:contentful_key),  "73RQf0xKeIY2uu68ueOsm6" ) %>
 <h2><%= content["fields"]["title"] %> </h2>
 <div class="jumbotron">
 	<%= case Earmark.as_html(content["fields"]["body"]) do

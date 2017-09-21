@@ -23,7 +23,7 @@ defmodule Chrono.Update do
   end
 
     defp updatewatchdb() do
-    content = Contentful.Delivery.content_type(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"), "watch")
+    content = Contentful.Delivery.content_type(Application.get_env(:chrono,:contentful_space), Application.get_env(:chrono,:contentful_key), "watch")
     watch = Chrono.Repo.get!(Chrono.Watch, 1)
     if  content["sys"]["updatedAt"] != watch.name do
       watch 
@@ -32,7 +32,7 @@ defmodule Chrono.Update do
 
       q = from w in Chrono.Watch, where: w.id != 1
       Chrono.Repo.delete_all(q)
-      allwatches = Contentful.Delivery.entries(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"), %{"content_type" => "watch"} )
+      allwatches = Contentful.Delivery.entries(Application.get_env(:chrono,:contentful_space), Application.get_env(:chrono,:contentful_key), %{"content_type" => "watch"} )
       for w <- allwatches do
         changeset =
           %Chrono.Watch{}

@@ -21,9 +21,8 @@
         <ul class="nav navbar-nav">
           <li><a href="/diary"> Watch Diary</a></li>
           <li><a href="/gallery/all">Watch Gallery</a></li>
-          <% pages = Contentful.Delivery.entries(System.get_env("SPACE_ID"), System.get_env("ACCESS_TOKEN"), %{"content_type" => "chronopage"} ) %>
           <%= for page <- pages do %>
-          <li><a href="<%="/page/"<>page["fields"]["title"]%>"><%= page["fields"]["title"]%></a></li>
+          <li><a href="<%="/page/"<>page.title%>"><%= page.title%></a></li>
           <% end %>
         </ul>
 
