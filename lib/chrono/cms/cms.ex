@@ -27,7 +27,8 @@ defmodule Chrono.CMS do
   defp summarise_content(entry) do 
     %Content{id: entry["sys"]["id"], 
     title: entry["fields"]["title"],
-    fields: entry["fields"]}
+    fields: entry["fields"],
+    sys: entry["sys"]}
   end
 
 end
