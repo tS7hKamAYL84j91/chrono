@@ -32,16 +32,16 @@ defmodule Chrono.Update do
     # Again similar to Result/Either monad.
     # This section is imperative
     with {:ok, pc_updated} <- product_catalogue_last_updated() |> Chrono.Either.either, # Check when catalogue was last updated
-        {:ok, watch_tble_updated} <- watch_table_last_updated() |> Chrono.Either.either, # Check when table was last updated 
-        {:ok, true} <- watch_tble_updated |> update_required(pc_updated) |> Chrono.Either.either, # determine if we need to update table
-        {:ok, {a, _}} when a |> is_integer <- delete_watch_records() |> Chrono.Either.either, # delete existing records
-        {:ok,  results} <- insert_watch_records() |> Chrono.Either.either # update the datebase
-      do
-        {:ok, results |> Enum.reduce([ok: 0,error: 0], &count_results/2)} # function now returns a summary of results
-      else
-        {:error, %FunctionClauseError{}} -> {:ok, [ok: 0, error: 0]}# in case of %FunctionClauseError{} no updates
-        {:error, e} -> {:error, e}
-      end
+      {:ok, watch_tble_updated} <- watch_table_last_updated() |> Chrono.Either.either, # Check when table was last updated 
+      {:ok, true} <- watch_tble_updated |> update_required(pc_updated) |> Chrono.Either.either, # determine if we need to update table
+      {:ok, {a, _}} when a |> is_integer <- delete_watch_records() |> Chrono.Either.either, # delete existing records
+      {:ok,  results} <- insert_watch_records() |> Chrono.Either.either # update the datebase
+    do
+      {:ok, results |> Enum.reduce([ok: 0,error: 0], &count_results/2)} # function now returns a summary of results
+    else
+      {:error, %FunctionClauseError{}} -> {:ok, [ok: 0, error: 0]}# in case of %FunctionClauseError{} no updates
+      {:error, e} -> {:error, e}
+    end
   end
 
   defp count_results({:ok,_}, [ok: ok, error: error]), do:  [ok: ok + 1, error: error]
