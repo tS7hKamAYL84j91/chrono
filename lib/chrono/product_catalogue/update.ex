@@ -50,8 +50,8 @@ defmodule Chrono.ProductCatalogue.Update do
 
   defp insert_watch_records() do
     for w <- Contentful.Delivery.entries(@space, @key, %{"content_type" => "watch"} ) do
-      %Chrono.Watch{}
-      |> Chrono.Watch.changeset(%{
+      %Chrono.ProductCatalogue.Watch{}
+      |> Chrono.ProductCatalogue.Watch.changeset(%{
         name: w["fields"]["name"], 
         description: w["fields"]["description"] , 
         category: 0 })
@@ -59,13 +59,13 @@ defmodule Chrono.ProductCatalogue.Update do
     end
   end
   
-  defp delete_watch_records(), do: (from w in Chrono.Watch) |> Chrono.Repo.delete_all
+  defp delete_watch_records(), do: (from w in Chrono.ProductCatalogue.Watch) |> Chrono.Repo.delete_all
 
   defp update_required(watch_tble_updated, pc_updated)
     when watch_tble_updated <= pc_updated or watch_tble_updated == nil, do: true 
 
   defp watch_table_last_updated() do 
-    (from w in Chrono.Watch, select: max(w.updated_at)) 
+    (from w in Chrono.ProductCatalogue.Watch, select: max(w.updated_at)) 
     |> Chrono.Repo.one
   end
 
