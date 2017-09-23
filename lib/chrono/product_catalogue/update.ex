@@ -1,4 +1,4 @@
-defmodule Chrono.Update do
+defmodule Chrono.ProductCatalogue.Update do
   @space Application.get_env(:chrono,:contentful_space)
   @key Application.get_env(:chrono, :contentful_key)
 
@@ -17,13 +17,14 @@ defmodule Chrono.Update do
   end
 
   def handle_info(:work, state) do
+    IO.inspect state
     schedule_work() # Reschedule once more
     updatewatchdb() 
     |> (&{:noreply, &1}).() # Updated state with results of db update
   end
 
   def schedule_work() do
-    Process.send_after(self(), :work, 24 * 60 * 60 * 1000) # In 2 hours
+    Process.send_after(self(), :work, 10000) #24 * 60 * 60 * 1000) # In 2 hours
   end
 
   defp updatewatchdb() do
