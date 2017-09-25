@@ -3,20 +3,18 @@ defmodule Chrono.CMS do
   The CMS context.
   """
   
-  alias Contentful.Delivery
+  alias Chrono.ContentfulCache
   alias Chrono.CMS.Content
 
-  @space Application.get_env(:chrono,:contentful_space)
-  @key  Application.get_env(:chrono,:contentful_key)
-  @about_content_type "chronopage"
+  @content_type "chronopage"
 
   @doc """
   List content returns all content it defaults to front page content 
   """
-  def list_content(content_type \\ @about_content_type) do
-     @space 
-     |> Delivery.entries(@key, %{"content_type" => content_type})
-     |> Enum.map(&summarise_content/1)
+  def list_content do
+    @content_type
+    |> ContentfulCache.get
+    |> Enum.map(&summarise_content/1)
   end
 
   @doc """

@@ -18,7 +18,7 @@ defmodule Chrono.ProductCatalogue.Update do
 
   def handle_info(:work, state) do
     IO.inspect state
-    schedule_work() # Reschedule once more
+    #schedule_work() # Reschedule once more
     updatewatchdb() 
     |> (&{:noreply, &1}).() # Updated state with results of db update
   end
