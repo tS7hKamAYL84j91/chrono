@@ -4,6 +4,7 @@ defmodule ChronoWeb.AboutController do
 	# plug Contentful
 
 	def index(conn, _params) do
-		render conn, "index.html"
+		conn
+		|> render "index.html"
 	end
 end

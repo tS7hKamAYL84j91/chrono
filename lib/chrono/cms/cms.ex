@@ -3,7 +3,7 @@ defmodule Chrono.CMS do
   The CMS context.
   """
   
-  alias Chrono.ContentfulCache
+  alias Chrono.Contentful.Repo
   alias Chrono.CMS.Content
 
   @content_type "chronopage"
@@ -13,14 +13,14 @@ defmodule Chrono.CMS do
   """
   def list_content do
     @content_type
-    |> ContentfulCache.get
+    |> Repo.get
     |> Enum.map(&summarise_content/1)
   end
 
   @doc """
   Gets a single content entry based on id
   """
-  def get_content!(id), do: @space |> Delivery.entry(@key, id) |> summarise_content
+  def get_content!(id), do: list_content |> Enum.find(&(&1.id == id))
   
   defp summarise_content(entry) do 
     %Content{id: entry["sys"]["id"], 

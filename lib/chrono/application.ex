@@ -14,7 +14,7 @@ defmodule Chrono.Application do
       supervisor(ChronoWeb.Endpoint, []),
       # Start your own worker by calling: Chrono.Worker.start_link(arg1, arg2, arg3)
       # worker(Chrono.Worker, [arg1, arg2, arg3]),
-      worker(Chrono.ContentfulCache, [["watch","chronopage"]]),
+      worker(Chrono.Contentful.Repo, [["watch","chronopage"]]),
       worker(Chrono.ProductCatalogue.Update, []) # Every 24 hours runs a function
     ]
 

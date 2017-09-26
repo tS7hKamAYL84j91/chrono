@@ -1,4 +1,4 @@
-defmodule Chrono.ContentfulCache do\
+defmodule Chrono.Contentful.Repo do\
   @space Application.get_env(:chrono,:contentful_space)
   @key Application.get_env(:chrono, :contentful_key)
 
@@ -12,7 +12,7 @@ defmodule Chrono.ContentfulCache do\
   @doc """
   Sets up Contentful Cache, populates the subscriptions and the intial cache of data
   """
-  def start_link(ress, opts \\ []) do 
+  def start_link(ress, opts \\ []) do
     __MODULE__ 
     |> GenServer.start_link(%{subs: ress, data: []}  , name: :contentful_cache)
   end
@@ -33,8 +33,11 @@ defmodule Chrono.ContentfulCache do\
   def update_cache, do: :contentful_cache |> GenServer.cast(:update_cache)
 
   # Server Callbacks
-  def init(state), do: {:ok, state |> update_data}
- 
+  def init(state) do 
+    schedule_work()
+    {:ok, state |> update_data}
+  end
+
   def handle_call({:get, res}, _from, %{data: data} = state) do 
     {:reply, data |> Keyword.get(res |> String.to_atom), state}
   end 
@@ -42,8 +45,16 @@ defmodule Chrono.ContentfulCache do\
   def handle_cast({:insert, res}, %{subs: ress}=state), do: {:noreply, %{state | subs: [res| ress]} |> update_data }
   def handle_cast(:update_cache, state), do: {:noreply, state |> update_data}
 
+  def handle_info(:work, state) do
+    schedule_work()
+    {:noreply, state |> update_data}
+  end
   # Helper functions
   defp update_data(%{subs: subs} = state), do: %{state | data: subs |> Enum.map(&retrieve_res/1)}
+  
   defp retrieve_res(res), do: {res |> String.to_atom, Delivery.entries(@space, @key, %{"content_type" => res})}
+
+  def schedule_work(), do: self() |> Process.send_after(:work, 60 * 1000)
+
 
 end
