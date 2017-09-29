@@ -8,56 +8,58 @@
     <meta name="author" content="vp, jb">
 
     <title>Chrono</title>
+    <link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/bootsketch.css") %>">
-    <!--link rel="stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"-->
-    
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/chrono.css") %>">
+    <!--Not sure how to drop this into CSS dynamically -->
+    <style> body { background-image: url(<%= background_img %>);}</style> 
   </head>
 
 
   <body>
-    <div class='container'>
-      <div class='row'>
-          <nav class="navbar navbar-inverse nav-fixed-top" role="navigation">
-            <div class="container-fluid">
-              <!-- Brand and toggle get grouped for better mobile display -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">Chrono</a>
-              </div>
 
-              <!-- Collect the nav links -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Link</a></li>
-                  <%= for page <- pages do %>
-                    <li><a href="<%="/page/"<>page.title%>"><%= page.title%></a></li>
-                  <% end %>
-                </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                  <%= if @conn.assigns[:user] do %>
-                    <li><a href="/account">Signed in as <%= @conn.assigns.user.first_name %></a></li>
-                    <li> <%= link "Sign out  ", to: auth_path(@conn, :delete), class: "button" %> </li>
-                  <% else %>
-                    <li> <%= link "Sign in with Google ", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %></li>
-                  <% end %>
-                </ul>
 
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>
-      </div>
-    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Chrono</a>
+        </div>
 
+        <!-- Collect the nav links -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <%= for page <- pages do %>
+              <li><a href="<%="#"<>page.title%>"><%= page.title%></a></li>
+            <% end %>
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right">
+            <%= if @conn.assigns[:user] do %>
+              <li><a href="/account">Signed in as <%= @conn.assigns.user.first_name %></a></li>
+              <li> <%= link "Sign out  ", to: auth_path(@conn, :delete), class: "button" %> </li>
+            <% else %>
+              <li> <%= link "Sign in with Google ", to: auth_path(@conn, :request, "google", scope: "email profile"), class: "button" %></li>
+            <% end %>
+          </ul>
+
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    
+    <div class="parallax"></div>
     <div class="container">
       <div class="row">
-        <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-        <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+        <%=if get_flash(@conn, :info) do %><p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
+        <%=if get_flash(@conn, :error) do %> <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
       </div>
     </div>
 

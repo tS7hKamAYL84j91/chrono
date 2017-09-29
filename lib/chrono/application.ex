@@ -1,6 +1,12 @@
 defmodule Chrono.Application do
   use Application
 
+  @content [
+    {:entries, "watch"},
+    {:entries, "chronopage"},
+    :assets]
+
+
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
@@ -14,7 +20,7 @@ defmodule Chrono.Application do
       supervisor(ChronoWeb.Endpoint, []),
       # Start your own worker by calling: Chrono.Worker.start_link(arg1, arg2, arg3)
       # worker(Chrono.Worker, [arg1, arg2, arg3]),
-      worker(Chrono.Contentful.Repo, [["watch","chronopage"]]),
+      worker(Chrono.Contentful.Repo, [@content]),
       worker(Chrono.ProductCatalogue.Update, []) # Every 24 hours runs a function
     ]
 

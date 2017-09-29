@@ -15,28 +15,12 @@ defmodule ChronoWeb.Router do
   end
 
   scope "/", ChronoWeb do
-    pipe_through :browser # Use the default browser stack
-
+    pipe_through :browser 
     get "/", PageController, :index
-    get "/page/:messenger", PageController, :show
-
-    get "/home", HomeController, :index
-    get "/home/:messenger", HomeController, :show
-
-    get "/account", AccountController, :index
   end
 
-  scope "/gallery", ChronoWeb do
+  scope "/auth", ChronoWeb do
     pipe_through :browser
-
-    get "/all", GalleryController, :index
-    get "/:messenger", GalleryController, :show
-
-  end
-
-   scope "/auth", ChronoWeb do
-    pipe_through :browser
-    
     get "/signout", AuthController, :delete
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :new
