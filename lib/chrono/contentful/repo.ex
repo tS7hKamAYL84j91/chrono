@@ -3,6 +3,11 @@ defmodule Chrono.Contentful.Repo do\
   @key Application.get_env(:chrono, :contentful_key)
   @schedule 60 * 60 * 1000
 
+  @content [
+    {:entries, "watch"},
+    {:entries, "chronopage"},
+    :assets]
+
   @moduledoc """
   Generic cach for data retrieved from APIs 
   """
@@ -13,7 +18,7 @@ defmodule Chrono.Contentful.Repo do\
   @doc """
   Sets up Contentful Cache, populates the subscriptions and the intial cache of data
   """
-  def start_link(ress, _opts \\ []) do
+  def start_link(ress \\ @content, _opts \\ []) do
     __MODULE__ 
     |> GenServer.start_link(%{subs: ress, data: []}  , name: :contentful_cache)
   end
