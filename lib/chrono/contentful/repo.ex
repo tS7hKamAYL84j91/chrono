@@ -6,6 +6,8 @@ defmodule Chrono.Contentful.Repo do\
   @content [
     {:entries, "watch"},
     {:entries, "chronopage"},
+    {:entries, "pricingPlans"},
+    {:entries, "welcome"},
     :assets]
 
   @moduledoc """
@@ -59,12 +61,12 @@ defmodule Chrono.Contentful.Repo do\
     {:noreply, state |> update_data}
   end
   # Helper functions
-  defp update_data(%{subs: subs} = state), do: %{state | data: subs |> Enum.map(&retrieve_res/1)}
+  defp update_data(%{subs: subs} = state), do: %{state | data: subs |> Task.async_stream(&retrieve_res/1) |> Enum.map(fn {:ok,cont} -> cont end) }
   
   defp retrieve_res({:entries, res}), do: {res |> String.to_atom, Delivery.entries(@space, @key, %{"content_type" => res})}
   defp retrieve_res(:assets), do: {:assets, Delivery.assets(@space, @key)}
   
-  def schedule_work(), do: self() |> Process.send_after(:work, @schedule)
+  defp schedule_work(), do: self() |> Process.send_after(:work, @schedule)
 
 
 end

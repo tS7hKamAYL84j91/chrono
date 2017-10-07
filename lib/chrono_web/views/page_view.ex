@@ -1,9 +1,13 @@
 defmodule ChronoWeb.PageView do
   use ChronoWeb, :view
 
-  def pages, do: Chrono.CMS.list_content |>  Enum.sort_by(&(&1.fields["order"])) |> Enum.map(&parse_content/1)
+  def welcome, do: content |> hd
+  
+  def pages, do: content |> tl
 
-  defp parse_content(cont), do: cont |> Map.put(:html, cont.body |> parse_html) |> Map.take([:title,:html])
+  def content, do: Chrono.CMS.list_pages |>  Enum.sort_by(&(&1.fields["order"])) |> Enum.map(&parse_content/1)
+  
+  defp parse_content(cont), do: cont |> Map.put(:html, cont.body |> parse_html) |> Map.take([:id, :title, :html, :background_img])
 
   defp parse_html(body) do
     with {:ok, html, _} <- body |> Earmark.as_html do 
