@@ -1,15 +1,11 @@
 defmodule Chrono.Contentful.Repo do\
-  @space Application.get_env(:chrono,:contentful_space)
-  @key Application.get_env(:chrono, :contentful_key)
-  @schedule 60 * 60 * 1000
-
-  @content [
-    {:entries, "watch"},
-    {:entries, "chronopage"},
-    {:entries, "pricingPlans"},
-    {:entries, "welcome"},
-    :assets]
-
+  @repo_config Application.get_env(:chrono, Chrono.Contentful.Repo)
+  
+  @schedule @repo_config |> Keyword.get(:schedule, 1000) 
+  @content  @repo_config |> Keyword.get(:content, [])
+  @key @repo_config |> Keyword.get(:contentful_key, nil)
+  @space @repo_config |> Keyword.get(:contentful_space, nil)
+  
   @moduledoc """
   Generic cach for data retrieved from APIs 
   """
