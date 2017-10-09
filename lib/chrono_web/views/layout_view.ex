@@ -1,7 +1,7 @@
 defmodule ChronoWeb.LayoutView do
   use ChronoWeb, :view
 
-  def pages, do: Chrono.CMS.list_pages |>  Enum.sort_by(&(&1.fields["order"])) |>  Enum.map(&Map.take(&1, [:title, ])) |> tl
+  def pages, do: Chrono.CMS.list_pages |>  Enum.sort_by(&(&1.fields["order"])) |>  Enum.map(&Map.take(&1, [:title])) |> tl
 
   def background_img do
     "https:" <> 

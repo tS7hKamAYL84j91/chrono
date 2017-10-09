@@ -2,7 +2,6 @@ defmodule Chrono.Contentful.Repo do\
   @repo_config Application.get_env(:chrono, Chrono.Contentful.Repo)
   
   @schedule @repo_config |> Keyword.get(:schedule, 1000) 
-  @content  @repo_config |> Keyword.get(:content, [])
   @key @repo_config |> Keyword.get(:contentful_key, nil)
   @space @repo_config |> Keyword.get(:contentful_space, nil)
   
@@ -16,9 +15,9 @@ defmodule Chrono.Contentful.Repo do\
   @doc """
   Sets up Contentful Cache, populates the subscriptions and the intial cache of data
   """
-  def start_link(ress \\ @content, _opts \\ []) do
+  def start_link do
     __MODULE__ 
-    |> GenServer.start_link(%{subs: ress, data: []}  , name: :contentful_cache)
+    |> GenServer.start_link(%{subs: [:assets | retrieve_content_types()] , data: []}  , name: :contentful_cache)
   end
 
   @doc """
@@ -38,7 +37,7 @@ defmodule Chrono.Contentful.Repo do\
   def update_cache, do: :contentful_cache |> GenServer.cast(:update_cache)
 
   # Server Callbacks
-  def init(state) do 
+  def init(state) do
     schedule_work()
     {:ok, state |> update_data}
   end
@@ -49,7 +48,7 @@ defmodule Chrono.Contentful.Repo do\
     {:reply, data |> Keyword.get(res |> String.to_atom), state}
   end 
 
-  def handle_cast({:insert, res}, %{subs: ress}=state), do: {:noreply, %{state | subs: [res| ress]} |> update_data }
+  def handle_cast({:insert, res}, %{subs: res}=state), do: {:noreply, %{state | subs: [res| res]} |> update_data }
   def handle_cast(:update_cache, state), do: {:noreply, state |> update_data}
 
   def handle_info(:work, state) do
@@ -59,6 +58,13 @@ defmodule Chrono.Contentful.Repo do\
   # Helper functions
   defp update_data(%{subs: subs} = state), do: %{state | data: subs |> Task.async_stream(&retrieve_res/1) |> Enum.map(fn {:ok,cont} -> cont end) }
   
+  def retrieve_content_types do
+    (fn -> Delivery.content_types(@space, @key) end)
+    |> Task.async 
+    |> Task.await 
+    |> Enum.map(&({:entries, &1 |> get_in(["sys","id"])}))
+  end
+
   defp retrieve_res({:entries, res}), do: {res |> String.to_atom, Delivery.entries(@space, @key, %{"content_type" => res})}
   defp retrieve_res(:assets), do: {:assets, Delivery.assets(@space, @key)}
   
