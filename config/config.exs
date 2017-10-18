@@ -6,8 +6,6 @@
 use Mix.Config
 
 # General application configuration
-config :chrono,
-  ecto_repos: [Chrono.Repo]
 
 # Configures the endpoint
 config :chrono, ChronoWeb.Endpoint,
@@ -21,16 +19,6 @@ config :chrono, ChronoWeb.Endpoint,
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
-
-# Configure Google OAuth
-config :ueberauth, Ueberauth,
-  providers: [
-    google: {Ueberauth.Strategy.Google, [default_scope: "emails profile plus.me"]}
-  ]
-
- config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: System.get_env("CLIENT_ID"),
-  client_secret: System.get_env("CLIENT_SECRET")
 
 config :chrono, Chrono.Contentful.Repo, 
   schedule: 1000 * 60 * 60
