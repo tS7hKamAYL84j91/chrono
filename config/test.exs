@@ -9,4 +9,13 @@ config :chrono, ChronoWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
-import_config "dev.secret.exs"
+# Configure your database
+config :chrono, Chrono.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "chrono_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox
+
+  import_config "dev.secret.exs"

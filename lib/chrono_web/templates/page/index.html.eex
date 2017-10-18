@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <%= raw(welcome().html) %>
+  <%= raw(welcome.html) %>
   <p class="lead">           
           <%= if @conn.assigns[:user] do %>
         <li class="menu-text">
