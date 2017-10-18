@@ -9,27 +9,25 @@
 </div>
 
 <%=for page <- pages() do %>
-  <section id="<%= page.title %>" class="content-section text-center">
-    <%= if page.background_img do %>  
-      <style> .container #<%= page.title |> String.replace(" ","") %> {
-        background: url(https:<%= page.background_img %>);
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }</style> 
-    <% end %>
-    
-    <div id="<%= page.title |> String.replace(" ","") %>"  class="container">
-      <div class="row">
-        <h1><%= page.title%></h1>
-        <%= raw(page.html) %>
-      </div>
-    </div>
-  </section>
-
-
-
+  <%= render "page.html", page: page %>
 <% end %>
+
+<div class="photo-gallery">
+  <div class="container">
+      <div class="intro">
+          <h2 class="text-center">The Watches  Subsection</h2>
+          <p class="text-center">Nunc luctus in metus eget fringilla. Aliquam sed justo ligula. Vestibulum nibh erat, pellentesque ut laoreet vitae. </p>
+      </div>
+      <div class="row photos">
+          <div class="col-lg-3 col-md-4 col-sm-6 item">
+              <a href="<%= static_path(@conn, "/images/logo.png")%>" data-lightbox="photos"><img class="img-responsive" src="<%= static_path(@conn, "/images/phoenix.png")%>"</a>
+          </div>
+          <div class="col-lg-3 col-md-4 col-sm-6 item">
+              <a href="<%= static_path(@conn, "/images/logo.png")%>" data-lightbox="photos"><img class="img-responsive" src="<%= static_path(@conn, "/images/logo.png")%>"</a>
+          </div>
+      </div>
+  </div>
+</div>
+
 
 
