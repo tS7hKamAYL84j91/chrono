@@ -5,53 +5,29 @@ defmodule Chrono.CMS do
   
   alias Chrono.Contentful.Repo
   alias Chrono.CMS.Content
-  Earm
 
   @pages "chronopage"
-  @welcome "welcome"
   @assets "assets"
 
   @doc """
-  List content returns all content it defaults to front page content 
+  get_all returns content of either pages or assets
   """
-  def list_pages do
-    @pages
-    |> Repo.get
-    |> Enum.map(&summarise_content/1)
+  def get_all(:content), do: @pages |> Repo.get_all |> Enum.map(&to_content(&1))
+  def get_all(:assets), do: @assets |> Repo.get_all
+
+  defp to_content(entry) do
+    %Content{id: entry |> get_in(["sys","id"]), 
+    title: entry |> get_in(["fields","title"]),
+    body: entry |> get_in(["fields","body"]),
+    fields: entry |> get_in(["fields"]),
+    sys: entry |> get_in(["sys"]), 
+    background_img: entry |> get_in(["fields", "bacgroundImage", "fields", "file", "url"]),
+    linked_content: entry |> get_in(["fields", "relatedContent"]) |> get_linked_resource}
   end
-
-  @doc """
-  List media in CMS
-  """
-  def list_assets do
-    @assets
-    |> Repo.get
-  end
-
-  @doc """
-  Gets the main welcome message
-  """
-  def get_welcome do
-    @welcome
-    |> Repo.get |> Enum.map(&summarise_content/1)
-  end
-
-
-  @doc """
-  Gets a single content entry based on id
-  """
-  def get_content!(id), do: list_pages() |> Enum.find(&(&1.id == id))
   
-  defp summarise_content(entry) do 
-    %Content{id: entry["sys"]["id"], 
-    title: entry["fields"]["title"],
-    fields: entry["fields"],
-    sys: entry["sys"], 
-    body: entry["fields"]["body"],
-    background_img: entry["fields"]["bacgroundImage"]["fields"]["file"]["url"]}
-  end
+  defp to_content(_content_type, entry), do: to_content(entry) |> Map.put(:body, entry |> get_in(["fields", "description"]))
 
-
-  
+  defp get_linked_resource(nil), do: nil
+  defp get_linked_resource(xs), do: xs |> Enum.map(&to_content(&1 |> get_in(["sys", "contentType", "sys", "id"]),&1))
 
 end

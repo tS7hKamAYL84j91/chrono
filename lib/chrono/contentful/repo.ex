@@ -23,8 +23,9 @@ defmodule Chrono.Contentful.Repo do\
   @doc """
   Get returns the cached data for the resource passed as an argument  
   """
-  def get(res), do: :contentful_cache |> GenServer.call({:get, res})
   def get_all, do: :contentful_cache |> GenServer.call(:get_all)
+  def get_all(res), do: :contentful_cache |> GenServer.call({:get, res})
+  
 
   @doc """
   Inserts a new resource to be tracked by the cache and refreshes the data
@@ -36,10 +37,11 @@ defmodule Chrono.Contentful.Repo do\
   """
   def update_cache, do: :contentful_cache |> GenServer.cast(:update_cache)
 
+  
   # Server Callbacks
   def init(state) do
     schedule_work()
-    {:ok, state |> update_data}
+    {:ok, state |> update_state}
   end
 
   def handle_call(:get_all, _from, state), do: {:reply, state, state}
@@ -48,17 +50,18 @@ defmodule Chrono.Contentful.Repo do\
     {:reply, data |> Keyword.get(res |> String.to_atom), state}
   end 
 
-  def handle_cast({:insert, res}, %{subs: res}=state), do: {:noreply, %{state | subs: [res| res]} |> update_data }
-  def handle_cast(:update_cache, state), do: {:noreply, state |> update_data}
+  def handle_cast({:insert, res}, %{subs: res}=state), do: {:noreply, %{state | subs: [res| res]} |> update_state }
+  def handle_cast(:update_cache, state), do: {:noreply, state |> update_state}
 
   def handle_info(:work, state) do
     schedule_work()
-    {:noreply, state |> update_data}
+    {:noreply, state |> update_state}
   end
+    
   # Helper functions
-  defp update_data(%{subs: subs} = state), do: %{state | data: subs |> Task.async_stream(&retrieve_res/1) |> Enum.map(fn {:ok,cont} -> cont end) }
+  defp update_state(%{subs: subs} = state), do: %{state | data: subs |> Task.async_stream(&retrieve_res/1) |> Enum.map(fn {:ok,cont} -> cont end) }
   
-  def retrieve_content_types do
+  defp retrieve_content_types do
     (fn -> Delivery.content_types(@space, @key) end)
     |> Task.async 
     |> Task.await 

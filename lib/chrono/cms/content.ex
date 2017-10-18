@@ -1,3 +1,7 @@
 defmodule Chrono.CMS.Content do
-  defstruct   [:id, :title, :fields, :sys, :body, :background_img]
+  @content [:id, :title, :fields, :sys, :body, :background_img, :linked_content]
+  
+  defstruct  @content
+
+  def content, do: @content
 end

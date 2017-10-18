@@ -5,7 +5,7 @@ defmodule ChronoWeb.PageView do
   
   def pages, do: content |> tl
 
-  def content, do: Chrono.CMS.list_pages |>  Enum.sort_by(&(&1.fields["order"])) |> Enum.map(&parse_content/1)
+  def content, do: Chrono.CMS.get_all(:content) |>  Enum.sort_by(&(&1.fields["order"])) |> Enum.map(&parse_content/1)
   
   defp parse_content(cont), do: cont |> Map.put(:html, cont.body |> parse_html) |> Map.take([:id, :title, :html, :background_img])
 
