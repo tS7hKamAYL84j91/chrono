@@ -1,9 +1,9 @@
 defmodule ChronoWeb.PageView do
   use ChronoWeb, :view
 
-  def welcome, do: content |> hd
+  def welcome, do: content() |> hd
   
-  def pages, do: content |> tl
+  def pages, do: content() |> tl
 
   def content, do: Chrono.CMS.get_all(:content) |>  Enum.sort_by(&(&1.fields["order"])) |> Enum.map(&parse_content/1)
   
