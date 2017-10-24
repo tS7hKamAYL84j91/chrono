@@ -1,15 +1,10 @@
-defmodule Chrono.Contentful.Repo do\
-  @repo_config Application.get_env(:chrono, Chrono.Contentful.Repo)
-  
-  @schedule @repo_config |> Keyword.get(:schedule, 1000) 
-  @key @repo_config |> Keyword.get(:contentful_key, nil)
-  @space @repo_config |> Keyword.get(:contentful_space, nil)
-  
+defmodule Chrono.Contentful.Repo do
   @moduledoc """
   Generic cach for data retrieved from APIs 
   """
   use GenServer
   alias Contentful.Delivery
+  require Chrono.Either
 
   # Client API
   @doc """
@@ -24,8 +19,8 @@ defmodule Chrono.Contentful.Repo do\
   Get returns the cached data for the resource passed as an argument  
   """
   def get_all, do: :contentful_cache |> GenServer.call(:get_all)
-  def get_all(res), do: :contentful_cache |> GenServer.call({:get, res})
-  
+  def get_all(res) when is_binary(res), do: get_all(res |> String.to_atom)
+  def get_all(res) when is_atom(res), do: :contentful_cache |> GenServer.call({:get, res})
 
   @doc """
   Inserts a new resource to be tracked by the cache and refreshes the data
@@ -47,7 +42,7 @@ defmodule Chrono.Contentful.Repo do\
   def handle_call(:get_all, _from, state), do: {:reply, state, state}
 
   def handle_call({:get, res}, _from, %{data: data} = state) do 
-    {:reply, data |> Keyword.get(res |> String.to_atom), state}
+    {:reply, data |> Keyword.get(res), state}
   end 
 
   def handle_cast({:insert, res}, %{subs: res}=state), do: {:noreply, %{state | subs: [res| res]} |> update_state }
@@ -62,16 +57,32 @@ defmodule Chrono.Contentful.Repo do\
   defp update_state(%{subs: subs} = state), do: %{state | data: subs |> Task.async_stream(&retrieve_res/1) |> Enum.map(fn {:ok,cont} -> cont end) }
   
   defp retrieve_content_types do
-    (fn -> Delivery.content_types(@space, @key) end)
+    (fn -> retrieve_res(:content_types) end)
     |> Task.async 
     |> Task.await 
     |> Enum.map(&({:entries, &1 |> get_in(["sys","id"])}))
   end
 
-  defp retrieve_res({:entries, res}), do: {res |> String.to_atom, Delivery.entries(@space, @key, %{"content_type" => res})}
-  defp retrieve_res(:assets), do: {:assets, Delivery.assets(@space, @key)}
+  defp retrieve_res(type) do
+    with {:ok, result} when result != nil <- retrieve_res!(type) |> Chrono.Either.either
+    do
+      result
+    else
+      {:ok,nil} -> []
+      {:error, e} ->  {:error, e}
+    end 
+  end
+
+  defp retrieve_res!(:content_types), do: Delivery.content_types(space(), key())
+  defp retrieve_res!(:assets), do: {:assets, Delivery.assets(space(), key())}
+  defp retrieve_res!({:entries, res}), do: {res |> String.to_atom, Delivery.entries(space(), key(), %{"content_type" => res})}
+
+  defp schedule_work(), do: self() |> Process.send_after(:work, schedule())
+
+  defp repo_config,do: Application.get_env(:chrono, Chrono.Contentful.Repo)
   
-  defp schedule_work(), do: self() |> Process.send_after(:work, @schedule)
-
-
+  defp schedule, do: repo_config() |> Keyword.get(:schedule, 1000) 
+  defp key, do: repo_config() |> Keyword.get(:contentful_key, nil)
+  defp space, do: repo_config() |> Keyword.get(:contentful_space, nil) 
+  
 end

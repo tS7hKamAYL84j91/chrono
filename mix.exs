@@ -40,7 +40,8 @@ defmodule Chrono.Mixfile do
       {:poison, "~> 2.0"},
       {:contentful, "~> 0.1.1"},
       {:earmark, "~> 1.2"},
-      {:distillery, "~> 1.5", runtime: false}
+      {:distillery, "~> 1.4", runtime: false},
+      {:mix_docker, "~> 0.5.0"}
     ]
   end
 

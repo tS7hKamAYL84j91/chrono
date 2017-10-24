@@ -1,0 +1,10 @@
+FROM elixir:1.5.2-alpine
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apk add --update bash && rm -rf /var/cache/apk/*
+EXPOSE 8000
+ENV PORT=8000 MIX_ENV=prod REPLACE_OS_VARS=true SHELL=/bin/sh
+  
+WORKDIR /app
+COPY ./chrono.tar.gz ./
+RUN tar xfz chrono.tar.gz
+ENTRYPOINT ["bin/chrono"]

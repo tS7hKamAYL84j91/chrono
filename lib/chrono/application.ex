@@ -6,6 +6,12 @@ defmodule Chrono.Application do
   def start(_type, _args) do
     import Supervisor.Spec
 
+    :chrono
+    |> Application.get_all_env
+    |> Keyword.keys
+    |> Enum.map(&update_env_config(:chrono,&1))
+
+
     # Define workers and child supervisors to be supervised
     children = [
       # Start the endpoint when the application starts
@@ -27,5 +33,15 @@ defmodule Chrono.Application do
     ChronoWeb.Endpoint.config_change(changed, removed)
     :ok
   end
+
+
+  def update_env_config(app, config) do
+    Application.get_env(app, config)
+    |> Enum.map(&get_env_config/1)
+    |> (&Application.put_env(app, config, &1)).()
+  end
+
+  def get_env_config({key, {:system, env_var}}), do: {key, System.get_env(env_var)}
+  def get_env_config(var), do: var
 
 end

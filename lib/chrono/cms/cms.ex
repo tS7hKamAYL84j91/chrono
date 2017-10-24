@@ -5,6 +5,7 @@ defmodule Chrono.CMS do
   
   alias Chrono.Contentful.Repo
   alias Chrono.CMS.Content
+  require Chrono.Either
 
   @pages "chronopage"
   @assets "assets"
@@ -12,8 +13,20 @@ defmodule Chrono.CMS do
   @doc """
   get_all returns content of either pages or assets
   """
-  def get_all(:content), do: @pages |> Repo.get_all |> Enum.map(&to_content(&1))
-  def get_all(:assets), do: @assets |> Repo.get_all
+
+  def get_all(type) do
+    with {:ok, result} when result != nil <- get_all!(type) |> Chrono.Either.either
+    do
+      result
+    else
+      {:ok,nil} -> []
+      {:error, e} ->  {:error, e}
+    end 
+  end
+
+
+  def get_all!(:content), do: @pages |> Repo.get_all |> Enum.map(&to_content(&1))
+  def get_all!(:assets), do: @assets |> Repo.get_all
 
   defp to_content(entry) do
     %Content{id: entry |> get_in(["sys","id"]), 
