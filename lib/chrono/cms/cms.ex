@@ -6,6 +6,7 @@ defmodule Chrono.CMS do
   alias Chrono.Contentful.Repo
   alias Chrono.CMS.Content
   require Chrono.Either
+  require Logger
 
   @pages "chronopage"
   @assets "assets"
@@ -13,6 +14,18 @@ defmodule Chrono.CMS do
   @doc """
   get_all returns content of either pages or assets
   """
+
+  def get_all(type, filter_fn, return_fn, default_value, caller) do
+    with {:ok, rs} <- Chrono.CMS.get_all(type)
+      |> (&filter_fn.(&1)).()
+      |> Chrono.Either.either
+    do
+      return_fn.(rs)
+    else
+      {:error, err} -> Logger.warn "#{inspect __MODULE__}-#{inspect caller}:#{inspect err} Danger Will Robinson there is no image falling back local"
+        default_value
+    end
+  end
 
   def get_all(type) do
     with {:ok, result} when result != nil <- get_all!(type) |> Chrono.Either.either

@@ -21,7 +21,7 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :chrono, Chrono.Contentful.Repo, 
-  schedule: 1000 * 60 * 60
+  schedule: 60 * 60 * 1000 # in milliseconds aka 1000 = 1 second
 
 config :mix_docker, image: "jimandsalbrownmsncom/chrono"
 

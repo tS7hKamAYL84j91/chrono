@@ -5,16 +5,17 @@ defmodule Chrono.Contentful.Repo do
   use GenServer
   alias Contentful.Delivery
   require Chrono.Either
+  require Logger
 
   # Client API
   @doc """
   Sets up Contentful Cache, populates the subscriptions and the intial cache of data
   """
-  def start_link do
+  def start_link do 
     __MODULE__ 
-    |> GenServer.start_link(%{subs: [:assets | retrieve_content_types()] , data: []}  , name: :contentful_cache)
+    |> GenServer.start_link(%{subs: 
+      [{:entries, "chronopage"}], data: []}, name: :contentful_cache)
   end
-
   @doc """
   Get returns the cached data for the resource passed as an argument  
   """
@@ -36,9 +37,9 @@ defmodule Chrono.Contentful.Repo do
   # Server Callbacks
   def init(state) do
     schedule_work()
-    {:ok, state |> update_state}
+    {:ok, state |> retrieve_content_types |> update_state}
   end
-
+ 
   def handle_call(:get_all, _from, state), do: {:reply, state, state}
 
   def handle_call({:get, res}, _from, %{data: data} = state) do 
@@ -56,6 +57,16 @@ defmodule Chrono.Contentful.Repo do
   # Helper functions
   defp update_state(%{subs: subs} = state), do: %{state | data: subs |> Task.async_stream(&retrieve_res/1) |> Enum.map(fn {:ok,cont} -> cont end) }
   
+  defp retrieve_content_types(state) do
+    with ct when ct != nil <- retrieve_content_types
+    do
+      %{state | subs: [:assets |ct]}
+    else
+      res -> Logger.warn "{inspect __MODULE__}: Danger Will Robinson Content Type look up failed; {inspect res} "
+      state
+    end
+  end
+
   defp retrieve_content_types do
     (fn -> retrieve_res(:content_types) end)
     |> Task.async 
