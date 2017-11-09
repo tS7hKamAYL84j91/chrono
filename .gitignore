@@ -25,7 +25,7 @@ npm-debug.log
 # secrets files as long as you replace their contents by environment
 # variables.
 /config/*.secret.exs
-/k8s/*
+/google_config/*
 
 #
 .DS_Store

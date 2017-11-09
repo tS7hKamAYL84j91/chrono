@@ -18,14 +18,14 @@ config :chrono, ChronoWeb.Endpoint,
   url: [scheme: "https", host: "chronotest.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/cache_manifest.json",
-  secret_key_base: Map.fetch!(System.get_env(), "SECRET_KEY_BASE")
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
 config :logger, level: :info
 
 config :chrono,
-  contentful_key: System.get_env("ACCESS_TOKEN"),
-  contentful_space: System.get_env("SPACE_ID")
+  contentful_key: System.get_env("CONTENTFUL_KEY"),
+  contentful_space: System.get_env("CONTENTFUL_SPACE")
 
 
 # ## SSL Support
