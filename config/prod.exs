@@ -10,6 +10,6 @@ config :chrono, ChronoWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :debug
 
-config :chrono, Chrono.Contentful.Repo,
+config :chrono, Chrono.Repo,
   contentful_key: "${CONTENTFUL_KEY}",
   contentful_space: "${CONTENTFUL_SPACE}"

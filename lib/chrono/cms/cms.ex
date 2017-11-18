@@ -3,7 +3,7 @@ defmodule Chrono.CMS do
   The CMS context.
   """
   
-  alias Chrono.Contentful.Repo
+  alias Chrono.Repo
   alias Chrono.CMS.Content
   require Chrono.Either
   require Logger
@@ -32,8 +32,8 @@ defmodule Chrono.CMS do
     do
       result
     else
-      {:ok,nil} -> []
-      {:error, e} ->  {:error, e}
+      {:ok, nil} -> []
+      {:error, e} ->  e
     end 
   end
 

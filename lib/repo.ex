@@ -1,4 +1,4 @@
-defmodule Chrono.Contentful.Repo do
+defmodule Chrono.Repo do
   @moduledoc """
   Generic cach for data retrieved from APIs 
   """
@@ -90,7 +90,7 @@ defmodule Chrono.Contentful.Repo do
 
   defp schedule_work(), do: self() |> Process.send_after(:work, schedule())
 
-  defp repo_config,do: Application.get_env(:chrono, Chrono.Contentful.Repo)
+  defp repo_config,do: Application.get_env(:chrono, Chrono.Repo)
   
   defp schedule, do: repo_config() |> Keyword.get(:schedule, 1000) 
   defp key, do: repo_config() |> Keyword.get(:contentful_key, nil)

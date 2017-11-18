@@ -20,7 +20,7 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-config :chrono, Chrono.Contentful.Repo, 
+config :chrono, Chrono.Repo, 
   schedule: 60 * 60 * 1000 # in milliseconds aka 1000 = 1 second
 
 config :mix_docker, image: "jimandsalbrownmsncom/chrono"
