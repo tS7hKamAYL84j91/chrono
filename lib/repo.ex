@@ -37,15 +37,15 @@ defmodule Chrono.Repo do
   def handle_cast(:invalidate_cache, state), do: {:noreply, %{state | last_updated: 0}}
 
   # Helper functions
-  def update_cache(%{last_updated: last_updated, subs: subs}=state) do
+  defp update_cache(%{last_updated: last_updated, subs: subs}=state) do
     case cache_stale(last_updated) do
       true -> %{state | data: subs |> Task.async_stream(&retrieve_data/1) |> Enum.map(fn {:ok,cont} -> cont end), last_updated: now()}
       false -> state
     end
   end
 
-  defp now(), do: :calendar.datetime_to_gregorian_seconds(:calendar.local_time)
   defp cache_stale(last_updated), do: now() - last_updated > schedule()
+  defp now(), do: :calendar.datetime_to_gregorian_seconds(:calendar.local_time)
 
   defp retrieve_content_types(state) do
     with ct when ct != nil <- :content_types |> retrieve_data! |> Enum.map(&({:entries, &1 |> get_in(["sys","id"])}))
