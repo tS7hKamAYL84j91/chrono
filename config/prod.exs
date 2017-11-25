@@ -23,8 +23,7 @@ config :chrono, ChronoWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :debug
 
-config :chrono,
-  load_from_system_env: true,
+config :chrono, Chrono.CMS.Repo,
   contentful_key: System.get_env("CONTENTFUL_KEY"),
   contentful_space: System.get_env("CONTENTFUL_SPACE")
 
