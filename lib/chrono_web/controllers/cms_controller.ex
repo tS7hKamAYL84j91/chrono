@@ -4,7 +4,7 @@ defmodule ChronoWeb.CMSController do
 
   def create(conn, _params) do 
     Logger.debug(inspect conn)
-    Chrono.Repo.invalidate_cache
+    Chrono.CMS.Repo.invalidate_cache
     conn
     |> Plug.Conn.put_status(:created)
     |> render("create.json", headers: conn.req_headers)

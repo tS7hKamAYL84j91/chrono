@@ -1,4 +1,4 @@
-defmodule Chrono.Repo do
+defmodule Chrono.CMS.Repo do
   @moduledoc """
   Generic cach for data retrieved from APIs 
   """
@@ -8,6 +8,7 @@ defmodule Chrono.Repo do
   require Logger
 
   # Client API
+
   @doc """
   Sets up Contentful Cache, populates the subscriptions and the intial cache of data
   """
@@ -16,27 +17,42 @@ defmodule Chrono.Repo do
     |> GenServer.start_link(%{subs: 
       [{:entries, "chronopage"}], data: [], last_updated: 0}, name: :contentful_cache)
   end
-  @doc """
-  Get returns the cached data for the resource passed as an argument  
-  """
-  def get_all, do: :contentful_cache |> GenServer.call(:get_all)
-  def get_all(res) when is_binary(res), do: get_all(res |> String.to_atom)
-  def get_all(res) when is_atom(res), do: :contentful_cache |> GenServer.call({:get, res})
 
   @doc """
-  Refreshes the cache data
+  Fetches entries from the data store for all content type
+  """
+  def all, do: :contentful_cache |> GenServer.call(:get_all) |> Map.get(:data)
+  
+  @doc """
+  Fetches entries for a single content type
+  """
+  def get(content_type) when is_binary(content_type), do: get(content_type |> String.to_atom)
+  def get(content_type) when is_atom(content_type), do: :contentful_cache |> GenServer.call({:get, content_type}) 
+  
+  @doc """
+  Fetches config for the adaptor.
+  """
+  def config, do: :contentful_cache |> GenServer.call(:get_all) |> Map.take([:last_updated, :subs])
+  
+  @doc """
+  Invalidates the cache of content held in the repo.
   """
   def invalidate_cache, do: :contentful_cache |> GenServer.cast(:invalidate_cache)
 
   # Server Callbacks
+
+  @doc """
+  A callback executed when the repo starts or when configuration is read
+  """
   def init(state), do: {:ok, state |> retrieve_content_types |> update_cache}
  
   def handle_call(:get_all, _from, state), do: state |> update_cache |> (&{:reply, &1, &1}).()
-  def handle_call({:get, res}, _from, state),do: state |> update_cache |> (&{:reply, &1 |> Map.get(:data) |> Keyword.get(res), &1}).()
+  def handle_call({:get, content_type}, _from, state),do: state |> update_cache |> (&{:reply, &1 |> Map.get(:data) |> Keyword.get(content_type), &1}).()
 
   def handle_cast(:invalidate_cache, state), do: {:noreply, %{state | last_updated: 0}}
 
   # Helper functions
+
   defp update_cache(%{last_updated: last_updated, subs: subs}=state) do
     case cache_stale(last_updated) do
       true -> %{state | data: subs |> Task.async_stream(&retrieve_data/1) |> Enum.map(fn {:ok,cont} -> cont end), last_updated: now()}
@@ -47,38 +63,29 @@ defmodule Chrono.Repo do
   defp cache_stale(last_updated), do: now() - last_updated > schedule()
   defp now(), do: :calendar.datetime_to_gregorian_seconds(:calendar.local_time)
 
-  defp retrieve_content_types(state) do
-    with ct when ct != nil <- :content_types |> retrieve_data! |> Enum.map(&({:entries, &1 |> get_in(["sys","id"])}))
-    do
-      %{state | subs: [:assets |ct]}
-    else
-      e ->
-        Logger.warn "#{inspect __MODULE__}: Danger Will Robinson Content Type look up failed; #{inspect e} "
-        state
-    end
-  end
+  defp retrieve_content_types(state), do: retrieve_data(:content_types) |> Enum.map(&({:entries, &1 |> get_in(["sys","id"])})) |> (&(%{state | subs: [:assets | &1]})).()  
 
-  defp retrieve_data(type) do
-    with {:ok, result} when result != nil <- retrieve_data!(type) |> Chrono.Either.either
-    do
+  defp retrieve_data(type, default \\ []) do
+    with {:ok, result} when result != nil <- type |> retrieve_data! |> Chrono.Either.either 
+    do 
       result
     else
-      {:ok,nil} -> []
-      {:error, e} ->  
+      e -> 
         Logger.warn "#{inspect __MODULE__}: Danger Will Robinson Content Type retrieval failed; #{inspect e} "
-        {:error, e}
-    end 
+        default
+    end
   end
 
   defp retrieve_data!(:content_types), do: Delivery.content_types(space(), key())
   defp retrieve_data!(:assets), do: {:assets, Delivery.assets(space(), key())}
-  defp retrieve_data!({:entries, res}), do: {res |> String.to_atom, Delivery.entries(space(), key(), %{"content_type" => res})}
+  defp retrieve_data!({:entries, content_type}), do: {content_type |> String.to_atom, Delivery.entries(space(), key(), %{"content_type" => content_type})}
 
-  defp repo_config, do: Application.get_env(:chrono, Chrono.Repo)
+  defp repo_config, do: Application.get_env(:chrono, Chrono.CMS.Repo)
 
   defp schedule, do: repo_config() |> Keyword.get(:schedule, nil) 
   defp key, do: repo_config() |> Keyword.get(:contentful_key, nil)
   defp space, do: repo_config() |> Keyword.get(:contentful_space, nil)
-   
+
+
   
 end

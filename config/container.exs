@@ -2,7 +2,8 @@ use Mix.Config
 
 config :chrono, ChronoWeb.Endpoint,
   http: [port: {:system, "PORT"}],
-  secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  url: [host: "${HOST}", port: "${PORT}"],
+  secret_key_base: "${SECRET_KEY_BASE}",
   check_origin: false,
   server: true
 
@@ -10,5 +11,5 @@ config :chrono, ChronoWeb.Endpoint,
 config :logger, level: :debug
 
 config :chrono, Chrono.CMS.Repo,
-  contentful_key: System.get_env("CONTENTFUL_KEY"),
-  contentful_space: System.get_env("CONTENTFUL_SPACE")
+  contentful_key: "${CONTENTFUL_KEY}",
+  contentful_space: "${CONTENTFUL_SPACE}"

@@ -3,7 +3,7 @@ defmodule Chrono.CMS do
   The CMS context.
   """
   
-  alias Chrono.Repo
+  alias Chrono.CMS.Repo
   alias Chrono.CMS.Content
   require Chrono.Either
   require Logger
@@ -12,11 +12,10 @@ defmodule Chrono.CMS do
   @assets "assets"
 
   @doc """
-  get_all returns content of either pages or assets
+  returns content of either pages or assets;  get/5 allows for filters, return fns along with a default value to be set.
   """
-
-  def get_all(type, filter_fn, return_fn, default_value, caller) do
-    with {:ok, rs} <- Chrono.CMS.get_all(type)
+  def get(type, filter_fn, return_fn, default_value, caller) do
+    with {:ok, rs} <- Chrono.CMS.get(type)
       |> (&filter_fn.(&1)).()
       |> Chrono.Either.either
     do
@@ -27,8 +26,8 @@ defmodule Chrono.CMS do
     end
   end
 
-  def get_all(type) do
-    with {:ok, result} when result != nil <- get_all!(type) |> Chrono.Either.either
+  def get(type) do
+    with {:ok, result} when result != nil <- get!(type) |> Chrono.Either.either
     do
       result
     else
@@ -38,8 +37,8 @@ defmodule Chrono.CMS do
   end
 
 
-  def get_all!(:content), do: @pages |> Repo.get_all |> Enum.map(&to_content(&1))
-  def get_all!(:assets), do: @assets |> Repo.get_all
+  def get!(:content), do: @pages |> Repo.get |> Enum.map(&to_content(&1))
+  def get!(:assets), do: @assets |> Repo.get
 
   defp to_content(entry) do
     %Content{id: entry |> get_in(["sys","id"]), 

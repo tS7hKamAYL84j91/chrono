@@ -41,7 +41,8 @@ defmodule Chrono.Mixfile do
       {:contentful, "~> 0.1.1"},
       {:earmark, "~> 1.2"},
       {:distillery, "~> 1.4", runtime: false},
-      {:mix_docker, "~> 0.5.0"}
+      {:mix_docker, "~> 0.5.0"},
+      {:vex, "~> 0.6.0"}
     ]
   end
 

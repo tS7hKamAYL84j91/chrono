@@ -12,7 +12,7 @@ defmodule Chrono.Application do
       supervisor(ChronoWeb.Endpoint, []),
       # Start your own worker by calling: Chrono.Worker.start_link(arg1, arg2, arg3)
       # worker(Chrono.Worker, [arg1, arg2, arg3]),
-      worker(Chrono.Repo, []),
+      worker(Chrono.CMS.Repo, []),
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
