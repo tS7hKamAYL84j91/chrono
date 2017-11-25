@@ -24,6 +24,7 @@ config :chrono, ChronoWeb.Endpoint,
 config :logger, level: :debug
 
 config :chrono,
+  load_from_system_env: true,
   contentful_key: System.get_env("CONTENTFUL_KEY"),
   contentful_space: System.get_env("CONTENTFUL_SPACE")
 
