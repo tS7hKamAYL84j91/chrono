@@ -37,12 +37,17 @@
               <li><a href="<%="#"<>page.title%>"><%= page.title%></a></li>
             <% end %>
           </ul>
+          <!-- Trigger the modal with a button -->
+          <button type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#registerInterest">Register Interest</button>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
 
     
     <div class="parallax"></div>
+    <!-- Modal Register Interest -->
+    <%= render "register_interest.html", conn: @conn%>
+
     <div class="container">
       <div class="row">
         <%=if get_flash(@conn, :info) do %><p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
@@ -58,11 +63,12 @@
       </div>
     </main>
 
-    
-    <!--script src="<%= static_path(@conn, "/js/vendors.min.js") %>"></script-->
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+ 
   </body>
 </html>

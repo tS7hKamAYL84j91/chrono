@@ -19,7 +19,7 @@ defmodule Chrono.Mixfile do
   def application do
     [
       mod: {Chrono.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :elixir_google_spreadsheets]
     ]
   end
 
@@ -37,12 +37,13 @@ defmodule Chrono.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:poison, "~> 2.0"},
+      {:poison, "~> 2.0", override: true},
       {:contentful, "~> 0.1.1"},
       {:earmark, "~> 1.2"},
       {:distillery, "~> 1.4", runtime: false},
       {:mix_docker, "~> 0.5.0"},
-      {:vex, "~> 0.6.0"}
+      {:vex, "~> 0.6.0"},
+      {:elixir_google_spreadsheets, "~> 0.1.8"}
     ]
   end
 

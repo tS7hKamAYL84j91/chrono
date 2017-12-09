@@ -1,7 +1,7 @@
 defmodule ChronoWeb.CMSView do
   use ChronoWeb, :view
 
-  def render("create.json", %{headers: headers}) do
+  def render("create.json", %{headers: _headers}) do
     %{status: "201 Created"}
   end
 

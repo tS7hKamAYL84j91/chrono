@@ -12,10 +12,10 @@ defmodule Chrono.CRM.Commands.CreateLead do
                             length: [min: 4],
                             format: ~r/(\w+)@([\w.]+)/
   validates :family_name,   presence: true,
-                            format: ~r/^[a-z ,.'-]+$/i
+                            format: ~r/^[a-zA-Z ,.'-]+$/i
   validates :given_name,    presence: true,
-                            format: ~r/^[a-z ,.'-]+$/i
+                            format: ~r/^[a-zA-z ,.'-]+$/i
   validates :opt_in,        presence: true,
-                            acceptance: true
+                            inclusion: ["yes", "no"]
 
 end

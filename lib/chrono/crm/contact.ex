@@ -31,5 +31,7 @@ defmodule Chrono.CRM.Contact do
     end 
 
   end
+
+
   
 end

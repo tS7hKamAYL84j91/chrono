@@ -19,3 +19,25 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+
+$(function(){
+  $('button#submit').on('click', function(e){
+        e.preventDefault();
+        $.ajax({
+            url: "/contacts",
+            type: "POST",
+            data: $("form#contact_form").serialize(),
+            success: function(data){
+                console.log(data)
+                $("form#contact_form").each(function(){
+                    this.reset();
+                    grecaptcha.reset();
+                });
+            },
+            error: function(resp) { 
+                console.log(resp); 
+                grecaptcha.reset();
+            }
+        });
+  }); 
+});

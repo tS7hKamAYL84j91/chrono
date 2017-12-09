@@ -5,4 +5,6 @@ defmodule ChronoWeb.LayoutView do
 
   def pages(ps), do: ps |> Enum.map(&Map.take(&1, [:title])) |> tl
 
+  def recaptcha_key, do: :chrono |> Application.get_env(:recaptcha_key)
+
 end

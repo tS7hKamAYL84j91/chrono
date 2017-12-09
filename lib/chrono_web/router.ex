@@ -16,6 +16,7 @@ defmodule ChronoWeb.Router do
   scope "/", ChronoWeb do
     pipe_through :browser 
     get "/", PageController, :index
+    post "/contacts", CrmController, :create
 
   end
 
