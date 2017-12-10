@@ -27,7 +27,7 @@ config :chrono, Chrono.CMS.Repo,
   contentful_key: System.get_env("CONTENTFUL_KEY"),
   contentful_space: System.get_env("CONTENTFUL_SPACE")
 
-config :goth, json: System.get_env("GOTH")
+config :goth, json: System.get_env("GOTH") |> Base.decode64!
 
 config :chrono, 
   gss_id: System.get_env("SPREADSHEET_ID"),
