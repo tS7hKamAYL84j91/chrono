@@ -1,0 +1,26 @@
+<!-- vertical center / slider -->
+<section id="<%= @page.title |> String.replace(" ", "")%>">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6 slider">
+                <div id="as-slider" class="owl-carousel" data-autoplay="4000" data-navigation="false" data-dots="true" data-transition="">
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup2.jpg") %>);"></div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup3.jpg") %>);"></div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup4.jpg") %>);"></div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup1.jpg") %>);"></div>
+                </div>
+            </div> 
+            <div class="col-sm-6 bg-silver" style="height:500px;">
+                <div class="half-box-right">
+                    <div class="center-vertical">
+                        <div class="center-vertical-box">
+                            <h1><b><%= @page.title %></b></h1>	
+                            <%= raw(@page.html) %>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+</section> 
+<!-- end vertical center / slider -->

@@ -20,8 +20,10 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
+$(function(){ console.log("ready");})
+
 $(function(){
-  $('button#submit').on('click', function(e){
+  $('button#register').on('click', function(e){
         e.preventDefault();
         $.ajax({
             url: "/contacts",
@@ -41,3 +43,91 @@ $(function(){
         });
   }); 
 });
+
+
+// Menu Overlay function
+$(function() {
+	var bodyEl = document.body,
+		isOpen = false;
+
+	$('#menu-link, .close-menu, .overlay-menu a').on('click', function(){
+		$(bodyEl).toggleClass('menu-open');
+		$('#menu-link').toggleClass('is-clicked');
+		$("#overlay").toggleClass("open");
+		isOpen = !isOpen;
+		if(location.hostname === this.hostname){
+			return false;
+		}
+	});	
+});
+
+/*============================
+=            Core            =
+============================*/
+
+// Waypoints Animations 
+$(window).load(function(){
+	
+	$('.anima').waypoint(function(){
+		$(this).addClass('in');
+	},{offset:'95%'});
+	
+});
+
+$(function() {
+
+		// Smooth Hash Link Scroll
+		$('.smooth-scroll').click(function() {
+			if (location.pathname.replace(/^\//,'') === this.pathname.replace(/^\//,'') && location.hostname === this.hostname) {
+		
+				var target = $(this.hash);
+				target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+				if (target.length) {
+					$('html,body').animate({
+						scrollTop: target.offset().top
+					}, 1000);
+					return false;
+				}
+			}
+			});
+
+	// full-height 
+	function heroHeight() {
+		var $this = $('#hero'),
+		win = $(window),
+		dataHeight = $this.data('height');
+
+		if ($this.hasClass('full-height')) {
+			$this.css({
+				'height': (win.height())
+			});
+		} else {
+			$this.css({
+				'height': dataHeight + 'em'
+			});
+		}
+	}
+	// Start 
+	heroHeight();
+	$(window).resize(heroHeight);
+
+
+});
+
+/*-----  End of Core  ------*/
+
+/*=======================================
+=            Counter numbers            =
+=======================================*/
+
+$(function() {
+
+	$('.counter').counterUp({
+			time: 1000
+	});
+
+});
+
+/*-----  End of Counter numbers  ------*/
+
+

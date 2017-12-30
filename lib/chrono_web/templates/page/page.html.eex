@@ -1,19 +1,21 @@
-  <% page = @page %>
-  <section id="<%= page.title %>" class="content-section text-center">
-    <%= if page.background_img do %>  
-      <style> .container #<%= page.title |> String.replace(" ","") %> {
-        background: url(https:<%= page.background_img %>);
-        background-attachment: fixed;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-      }</style> 
-    <% end %>
-    
-    <div id="<%= page.title |> String.replace(" ","") %>">
-      <div class="row">
-        <h1><%= page.title%></h1>
-        <%= raw(page.html) %>
+<%= if @page.background_img do %> 
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom white-text" style="background: url(https:<%= @page.background_img %>); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
+  <div class="dark-overlay"></div>
+<% else %>
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom">
+<% end %>
+  <div class="container">
+    <div class="row header">
+      <div class="col-md-12 text-center">
+        <h2><%= @page.title %></h2>
       </div>
     </div>
-  </section>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 text-center">
+        <%= raw(@page.html) %>
+      </div>
+    </div>
+  </div>		
+</section>
+
+  

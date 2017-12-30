@@ -6,9 +6,9 @@ defmodule ChronoWeb.PageController do
       all_pages: [] |> all_pages, 
       background_img: background_img()
   end
-  
-  def all_pages(default), do: Chrono.CMS.get :content, fn content -> content |> Enum.sort_by(&(&1.fields["order"])) end, &(&1), default, __MODULE__
 
+  def all_pages(default), do: Chrono.CMS.get :content, fn content -> content |> Enum.sort_by(&(&1.fields["order"])) end, &(&1), default, __MODULE__
+  
   def background_img do
     Chrono.CMS.get(:assets, 
       fn assets -> assets

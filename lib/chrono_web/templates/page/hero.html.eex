@@ -1,0 +1,11 @@
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="hero m-center text-center bg-silver full-height">
+  <div class="center-box">
+    <div class="container-fluid nopadding">
+      <div class="hero-unit ">
+        <%= raw(@page.html) %>
+      </div>
+      <div class="col-sm-12 img-hero"></div>
+    </div>
+    <!--a href="#start" class="hero-start-link smooth-scroll anchor-link"><i class="fa fa-angle-double-down"></i></a-->
+  </div>
+</section>
