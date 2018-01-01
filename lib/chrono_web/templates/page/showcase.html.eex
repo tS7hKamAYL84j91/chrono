@@ -14,8 +14,7 @@
                 <div class="half-box-right">
                     <div class="center-vertical">
                         <div class="center-vertical-box">
-                            <h1><b><%= @page.title %></b></h1>	
-                            <%= raw(@page.html) %>
+                            <%= render "content.html", page: @page, conn: @conn %>
                         </div>
                     </div>
                 </div>

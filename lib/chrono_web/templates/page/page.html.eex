@@ -4,18 +4,9 @@
 <% else %>
 <section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom">
 <% end %>
-  <div class="container">
-    <div class="row header">
-      <div class="col-md-12 text-center">
-        <h2><%= @page.title %></h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 text-center">
-        <%= raw(@page.html) %>
-      </div>
-    </div>
-  </div>		
+<div class="container">
+  <%= render "content.html", page: @page, conn: @conn %>
+</div>
 </section>
 
   

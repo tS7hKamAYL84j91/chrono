@@ -1,11 +1,6 @@
 <section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom bg-clouds text-center">
   <div class="container">
-    <div class="row header">
-      <div class="col-md-12">
-        <h2><%= @page.title %></h2>
-        <%= raw(@page.html)%>  
-      </div>
-    </div>
+    <%= render "content.html", page: @page, conn: @conn %>
     <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <img src="<%= static_path(@conn, "/images/ps.png") %>" alt="#" class="img-responsive center-block" width="200" height="200">

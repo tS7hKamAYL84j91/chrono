@@ -1,14 +1,5 @@
 <section id="<%= @page.title |> String.replace(" ", "")%>" class="cta-1 bg-dark padding-top-bottom text-center white-text">
   <div class="container-fluid anima scale-in">
-    <div class="row header">
-      <div class="col-md-12 text-center">
-        <h2><%= @page.title %></h2>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2 text-center">
-        <%= raw(@page.html) %>
-      </div>
-    </div>
+    <%= render "content.html", page: @page, conn: @conn %>
   </div>		
 </section>
