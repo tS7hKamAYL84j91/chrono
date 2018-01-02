@@ -20,7 +20,6 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-$(function(){ console.log("ready");})
 
 $(function(){
   $('button#register').on('click', function(e){

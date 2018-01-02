@@ -41,7 +41,14 @@ function initSlider() {
 	});
 
 }
-if (pxContainer.length) {
-	initSlider();
-}
+
+
+$(function() {
+ 
+  if (pxContainer.length) {
+		initSlider();
+	}
+ 
+});
+
 /*-----  End of Slider  ------*/

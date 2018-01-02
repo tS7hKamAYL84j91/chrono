@@ -4,10 +4,10 @@
         <div class="row">
             <div class="col-sm-6 slider">
                 <div id="as-slider" class="owl-carousel" data-autoplay="4000" data-navigation="false" data-dots="true" data-transition="">
-                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup2.jpg") %>);"></div>
-                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup3.jpg") %>);"></div>
-                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup4.jpg") %>);"></div>
-                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup1.jpg") %>);"></div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup2.jpg") %>);">1</div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup3.jpg") %>);">2</div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup4.jpg") %>);">3</div>
+                    <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup1.jpg") %>);">4</div>
                 </div>
             </div> 
             <div class="col-sm-6 bg-silver" style="height:500px;">
