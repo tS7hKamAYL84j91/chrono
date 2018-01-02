@@ -10,7 +10,7 @@
                     <div class="item m-center" style="background-image: url(<%= static_path(@conn, "/images/cup1.jpg") %>);">4</div>
                 </div>
             </div> 
-            <div class="col-sm-6 bg-silver" style="height:500px;">
+            <div class="col-sm-6 bg-shop" style="height:500px;">
                 <div class="half-box-right">
                     <div class="center-vertical">
                         <div class="center-vertical-box">

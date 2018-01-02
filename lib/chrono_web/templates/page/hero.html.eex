@@ -1,19 +1,15 @@
-<section id="<%= @page.title |> String.replace(" ", "")%>" class="hero m-center text-center bg-silver full-height">
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="hero m-center text-center bg-shop full-height">
   <div class="center-box">
-    <div class="container-fluid nopadding">
-      <div class="hero-unit ">
-        <div class="row header">
-          <div class="col-md-12 text-center">
-            <h1><b><%= @page.title %></b></h1>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-8 col-md-offset-2 text-center">
-            <%= raw(@page.html) %>
-          </div>
-        </div>
+    <div class="container">
+      <div class="row header">
+        <h1><b><%= @page.title %></b></h1>
       </div>
-      <div class="col-sm-12 img-hero"></div>
+      <div class="row">
+        <%= raw(@page.html) %>
+      </div>
+      <div class="row">
+        <div class="col-md-8 img-hero"></div>
+      </div>
     </div>
     <!--a href="#start" class="hero-start-link smooth-scroll anchor-link"><i class="fa fa-angle-double-down"></i></a-->
   </div>

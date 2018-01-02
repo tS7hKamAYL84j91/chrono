@@ -1,4 +1,4 @@
-<section id="<%= @page.title |> String.replace(" ", "")%>" class="cta-1 bg-silver padding-top-bottom text-center">
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="cta-1 bg-shop padding-top-bottom text-center">
   <div class="container-fluid anima scale-in">
      <%= render "content.html", page: @page, conn: @conn %>
   </div>		

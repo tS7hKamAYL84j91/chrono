@@ -853,19 +853,20 @@ form p {
 .hero {
   height: 550px;
 }
-.hero .hero-unit {
-  text-align: center;
+/* .hero-unit {
+ text-align: center;
   padding: 0;
-  margin: 0;
+  margin:  0;
   background-color: transparent;
 }
-.hero .hero-unit h1 {
+*/
+.hero-unit h1 {
   font-size: 70px;
   font-weight: 200;
   margin-top: 70px;
 }
-.hero .hero-start-link,
-.hero .hero-start-link:focus {
+.hero-start-link,
+.hero-start-link:focus {
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -882,22 +883,24 @@ form p {
   color: #ffffff;
   background-color: #202020;
 }
-.hero .hero-start-link:hover,
-.hero .hero-start-link:focus:hover {
+.hero-start-link:hover,
+.hero-start-link:focus:hover {
   color: #bdc3c7;
   text-decoration: none;
 }
-.hero .img-hero {
+.img-hero {
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
   background-position: center top !important;
   text-align: center;
   padding-top: 100px;
   height: 200px;
+  
 }
-@media (max-width: 767px) {
-  .hero .img-hero {
-    margin-top: 30px;
+@media (max-width: 747px) {
+  .img-hero {
+    margin-top: 10px;
+    background-size: 100%;
   }
 }
 /*-----  End of Hero  ------*/
@@ -922,6 +925,9 @@ form p {
 @media (max-width: 767px) {
   .bg-image-2 {
     background: #bdc3c7 url(../images/mockup5.png) no-repeat 20% center;
+  }
+  .hero {
+
   }
 }
 blockquote,
