@@ -8,7 +8,7 @@
         <%= raw(@page.html) %>
       </div>
       <div class="row">
-        <div class="col-md-8 img-hero"></div>
+        <div class="col img-hero"></div>
       </div>
     </div>
     <!--a href="#start" class="hero-start-link smooth-scroll anchor-link"><i class="fa fa-angle-double-down"></i></a-->
