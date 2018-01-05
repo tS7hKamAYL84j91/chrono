@@ -1,0 +1,5 @@
+<div class="item m-center" style="
+  background: url(https:<%= @showcase_img.background_img %>); 
+  background-size: contain; 
+  background-repeat: no-repeat;
+  background-position: center center !important;"><%= raw(@showcase_img.html) %></div>
