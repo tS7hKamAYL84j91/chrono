@@ -40,5 +40,7 @@ defmodule ChronoWeb.PageView do
   def linked_content(%Chrono.CMS.Content{linked_content: cs}), do: cs |> parse_pages
 
   
+  def recaptcha_key, do: :chrono |> Application.get_env(:recaptcha_key)
+
 
 end

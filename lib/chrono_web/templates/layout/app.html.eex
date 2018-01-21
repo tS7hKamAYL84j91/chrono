@@ -30,13 +30,6 @@
       <span class="menu-icon"></span>
     </a>
 
-    <div class="container">
-      <div class="row">
-        <%=if get_flash(@conn, :info) do %><p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
-        <%=if get_flash(@conn, :error) do %> <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
-      </div>
-    </div>
-
     <div class="overlay" id="overlay">
       <nav class="overlay-menu">
         <ul>

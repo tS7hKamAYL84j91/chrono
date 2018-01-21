@@ -4,8 +4,7 @@
     <% end %>
 </div>
 
-
-
+<%= render "register_interest.html", conn: @conn %>
 
 
 

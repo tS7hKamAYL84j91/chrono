@@ -20,30 +20,6 @@ import "phoenix_html"
 
 // import socket from "./socket"
 
-
-$(function(){
-  $('button#register').on('click', function(e){
-        e.preventDefault();
-        $.ajax({
-            url: "/contacts",
-            type: "POST",
-            data: $("form#contact_form").serialize(),
-            success: function(data){
-                console.log(data)
-                $("form#contact_form").each(function(){
-                    this.reset();
-                    grecaptcha.reset();
-                });
-            },
-            error: function(resp) { 
-                console.log(resp); 
-                grecaptcha.reset();
-            }
-        });
-  }); 
-});
-
-
 // Menu Overlay function
 $(function() {
 	var bodyEl = document.body,

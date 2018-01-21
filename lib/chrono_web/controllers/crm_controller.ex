@@ -15,15 +15,19 @@ defmodule ChronoWeb.CrmController do
     "g-recaptcha-response" => captcha_token}=params) do
     
     with  {:ok, true} <- captcha_token |> validate_recaptcha,
-      {:ok, lead} <- Chrono.CRM.register_interest(email_address, last_name, first_name, opt_in |> parse_opt_in)
+      {:ok, _lead} <- Chrono.CRM.register_interest(email_address, last_name, first_name, opt_in |> parse_opt_in)
     do
       conn
-      |> Plug.Conn.send_resp(201,"Thanks for your registraiton #{inspect lead}, we'll be touch")
+      |> put_flash(:info, "pass")
+      |> redirect(to: "/")
+      #|> Plug.Conn.send_resp(201,"Thanks for your registraiton #{inspect lead}, we'll be touch")
     else
       resp -> 
         Logger.info "Dodgey submission #{inspect params} - #{inspect resp}"
         conn
-        |> Plug.Conn.send_resp(400,"There was an error processing your registration, please try again latter")
+        |> put_flash(:error, "fail")
+        |> redirect(to: "/")
+        #|> Plug.Conn.send_resp(400,"There was an error processing your registration, please try again latter")
     end
   end
 

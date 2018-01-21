@@ -53,7 +53,7 @@ a {
   transition: all 0.3s;
 }
 a:hover {
-  color: #dfae08;
+  color: #7f8c8d;
   text-decoration: none;
 }
 a:focus {
@@ -265,12 +265,14 @@ section {
 .myform {
   padding-top: 5px;
 }
-.myform .form-group label {
+
+/*.myform .form-group label {
   display: none;
 }
 .myform .no-placeholder .form-group label {
   display: block;
-}
+}*/
+
 .myform .no-placeholder .controls {
   margin-top: 0;
 }
@@ -735,9 +737,9 @@ form p {
   -moz-transition: none;
   -o-transition: none;
   transition: none;
-  -webkit-box-shadow: 0 4px 0 #dfae08;
-  -moz-box-shadow: 0 4px 0 #dfae08;
-  box-shadow: 0 4px 0 #dfae08;
+  -webkit-box-shadow: 0 4px 0 #7f8c8d;
+  -moz-box-shadow: 0 4px 0 #7f8c8d;
+  box-shadow: 0 4px 0 #7f8c8d;
 }
 .btn:hover,
 .btn:focus {

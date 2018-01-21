@@ -5,12 +5,16 @@
         <h1><b><%= @page.title %></b></h1>
       </div>
       <div class="row">
+        <%=if get_flash(@conn, :info) do %><p class="alert alert-success" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
+        <%=if get_flash(@conn, :error) do %> <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
+      </div>
+      <div class="row">
         <%= raw(@page.html) %>
       </div>
       <div class="row">
         <div class="col img-hero"></div>
       </div>
     </div>
-    <!--a href="#start" class="hero-start-link smooth-scroll anchor-link"><i class="fa fa-angle-double-down"></i></a-->
+    <a href="#contact" class="hero-start-link smooth-scroll anchor-link"><i class="fa fa-angle-double-down"></i></a>
   </div>
 </section>
