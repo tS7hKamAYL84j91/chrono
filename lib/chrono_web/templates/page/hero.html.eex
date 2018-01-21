@@ -5,10 +5,6 @@
         <h1><b><%= @page.title %></b></h1>
       </div>
       <div class="row">
-        <%=if get_flash(@conn, :info) do %><p class="alert alert-success" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
-        <%=if get_flash(@conn, :error) do %> <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
-      </div>
-      <div class="row">
         <%= raw(@page.html) %>
       </div>
       <div class="row">

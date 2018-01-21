@@ -18,15 +18,15 @@ defmodule ChronoWeb.CrmController do
       {:ok, _lead} <- Chrono.CRM.register_interest(email_address, last_name, first_name, opt_in |> parse_opt_in)
     do
       conn
-      |> put_flash(:info, "pass")
-      |> redirect(to: "/")
+      |> put_flash(:info, "Thanks for registering we'll be in touch soon")
+      |> redirect(to: "/#contact")
       #|> Plug.Conn.send_resp(201,"Thanks for your registraiton #{inspect lead}, we'll be touch")
     else
       resp -> 
         Logger.info "Dodgey submission #{inspect params} - #{inspect resp}"
         conn
-        |> put_flash(:error, "fail")
-        |> redirect(to: "/")
+        |> put_flash(:error, "There was a problem with your submission, please make sure you filled in all the details correctly")
+        |> redirect(to: "/#contact")
         #|> Plug.Conn.send_resp(400,"There was an error processing your registration, please try again latter")
     end
   end

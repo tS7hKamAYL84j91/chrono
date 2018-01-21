@@ -7,6 +7,10 @@
         </div>
       </div>
       <div class="row">
+        <%=if get_flash(@conn, :info) do %><p class="col-md-12 alert alert-success" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
+        <%=if get_flash(@conn, :error) do %> <p class="col-md-12 alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
+      </div>
+      <div class="row">
         <form id="contact_form" data-toggle="validator" role="form" class="myform" action="/contacts" method="post">
           <input name="_csrf_token" type="hidden" value= <%= Phoenix.Controller.get_csrf_token() %> >
           <input name="_utf8" type="hidden" value="✓">
