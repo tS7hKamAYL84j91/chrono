@@ -1,8 +1,8 @@
 <section id="<%= @page.title |> String.replace(" ", "")%>" class="hero m-center text-center bg-shop full-height">
   <div class="center-box">
     <div class="container">
-      <div class="row header">
-        <h1><b><%= @page.title %></b></h1>
+      <div class="row header hero-unit">
+        <h1 class="title"><b><%= @page.title %></b></h1>
       </div>
       <div class="row">
         <%= raw(@page.html) %>
