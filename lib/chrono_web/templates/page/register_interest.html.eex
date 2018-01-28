@@ -13,7 +13,8 @@
       <div class="row">
         <form id="contact_form" data-toggle="validator" role="form" class="myform" action="/contacts" method="post">
           <input name="_csrf_token" type="hidden" value= <%= Phoenix.Controller.get_csrf_token() %> >
-          <input name="_utf8" type="hidden" value="✓">
+          <input name="_utf8" type="hidden" value="✓"/>
+          <input name="opt_in" type="hidden" value="yes"/>
           <div class="form-group col-xs-12 col-sm-6 col-md-6">
             <label for="firstname">First Name:</label>
             <input type="firstname" class="form-control" name="firstname" placeholder="given name"  pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your first name" required>
@@ -28,11 +29,6 @@
             <label for="email">Email address:</label>
             <input type="email" class="form-control" name="email" placeholder="your.email@gmail.com" data-error="Please provide your email address" required>
             <div class="help-block with-errors"></div>
-          </div>
-          <div class="form-group col-xs-12 col-sm-12">
-            <div class="checkbox form-control">
-              <label><input name="opt_in" type="checkbox" checked="checked" required>I wish to register for further communications about Chrono6538</label>
-            </div>
           </div>
           <div class="form-group col-xs-12 col-sm-12 col-md-12 col-12">
             <div class="g-recaptcha" data-sitekey="<%= recaptcha_key() %>"></div>
