@@ -16,7 +16,7 @@ function initSlider() {
 
 	$this.waitForImages({
 		finished: function () {
-			// sleep(3000)
+			//sleep(10)
 			$('.landing').remove();
 			if ($this.hasClass('loaded')) {
 				var autoplay = $this.data('autoplay'),

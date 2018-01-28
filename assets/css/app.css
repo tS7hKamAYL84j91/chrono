@@ -1,5 +1,10 @@
 ul { list-style: lower-greek}
 
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
 /* 
  *  Owl Carousel - Animate Plugin
  */
@@ -106,7 +111,9 @@ ul { list-style: lower-greek}
 .owl-carousel .owl-item {
   position: relative;
   min-height: 1px;
+  max-height: 100%;
   float: left;
+  display:inline-flex;
   -webkit-backface-visibility: hidden;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -115,9 +122,12 @@ ul { list-style: lower-greek}
   -ms-user-select: none;
   user-select: none;
 }
+
 .owl-carousel .owl-item img {
   display: block;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   -webkit-transform-style: preserve-3d;
 }
 .owl-carousel.owl-text-select-on .owl-item {
