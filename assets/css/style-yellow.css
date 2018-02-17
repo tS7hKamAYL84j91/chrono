@@ -859,7 +859,7 @@ form p {
 .hero-title {
   font-size: 70px;
   font-weight: 200;
-  margin-top: 70px;
+  margin-top: 10px;
 }
 
 .hero-start-link,
@@ -888,20 +888,20 @@ form p {
 .img-hero {
   background-image: url('../images/logo.png');
   background-repeat: no-repeat;
-  background-position: center top !important;
+  background-position: center center !important;
   text-align: center;
   padding-top: 100px;
-  height: 200px;
+  height: 150px;
 }
-@media (max-width: 767px) {
-  .img-hero {
+@media (max-width: 747px) {
+  /*.img-hero {
     margin-top: 10px;
-    background-size: 80%; 
-  }
+    background-size: 80%;
+  }*/
   .hero-title {
     font-size: 50px;
     font-weight: 200;
-    margin-top: 70px;
+    margin-top: 10px;
   }
 }
 /*-----  End of Hero  ------*/
