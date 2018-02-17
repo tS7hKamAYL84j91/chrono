@@ -1,4 +1,12 @@
-ul { list-style: lower-greek}
+ul {
+  list-style: upper-roman;
+  list-style-position: inside;
+}
+
+ol { 
+  list-style: upper-roman;
+  list-style-position: inside;
+  }
 
 .col-centered{
   float: none;
