@@ -4,9 +4,9 @@
         <div class="row">
           <div class="col img-hero"></div>
         </div>
-        <div class="row">
+        <!--div class="row">
           <h1 class="hero-title"><b><%= @page.title %></b></h1>
-        </div>
+        </div-->
         <div class="row">
           <%= raw(@page.html) %>
         </div>
