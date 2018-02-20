@@ -1,5 +1,4 @@
 ul {
-  list-style: upper-roman;
   list-style-position: inside;
 }
 
@@ -13,6 +12,20 @@ ol {
   margin: 0 auto;
 }
 
+
+/*video{
+  position: absolute;
+  min-width: 100%;
+  min-height: 100%;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  -webkit-transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(2);
+  -moz-transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(2);
+  transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(2);
+  z-index: -99
+}*/
 
 video {
   top: 50%;
