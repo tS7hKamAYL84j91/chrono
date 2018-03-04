@@ -1,3 +1,7 @@
+<video autoplay poster="" class="video-parallax" loop muted>
+    <source src="https:<%= background_video() %>" type="video/mp4">
+</video>
+
 <div id="wrap">
     <%=for page <- parse_pages(@all_pages) do %>
         <%= render "#{page.template}.html", page: page, conn: @conn %>

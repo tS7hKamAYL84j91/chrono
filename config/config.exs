@@ -35,6 +35,8 @@ config :chrono,
   recaptcha_key:  "6LeIJzwUAAAAACawWIxhl8za50WcvsaHR0-v-qOH",
   recaptcha_url: "https://www.google.com/recaptcha/api/siteverify"
 
+config :chrono,
+  main_video: "main_content_background_video"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

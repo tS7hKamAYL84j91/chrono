@@ -1,0 +1,8 @@
+
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom white-text">
+  <div class="dark-overlay"></div>
+  <div class="container">
+    <%= render "content.html", page: @page, conn: @conn %>
+  </div>
+</section>
+

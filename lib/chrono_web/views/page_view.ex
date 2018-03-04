@@ -42,5 +42,16 @@ defmodule ChronoWeb.PageView do
   
   def recaptcha_key, do: :chrono |> Application.get_env(:recaptcha_key)
 
+  def background_video do 
+    with %{"fields" => _ }=bck_vd <- Chrono.CMS.Repo.get(:assets) 
+      |> Enum.find(&(&1["fields"]["title"] == :chrono |> Application.get_env(:main_video))) 
+    do
+      bck_vd
+    else
+      _e -> Logger.warn "#{__MODULE__}: Danger Will Robinson no background video defined"
+      %{"fields" => %{"file" => %{"url" => "//"}}}
+    end
+    |> get_in(["fields", "file", "url"])
+  end  
 
 end

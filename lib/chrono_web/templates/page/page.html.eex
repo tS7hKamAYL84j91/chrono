@@ -2,7 +2,7 @@
 <section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom white-text" style="background: url(https:<%= @page.background_img %>); background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;">
   <div class="dark-overlay"></div>
 <% else %>
-<section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom">
+<section id="<%= @page.title |> String.replace(" ", "")%>" class="padding-top-bottom bg-shop">
 <% end %>
 <div class="container">
   <%= render "content.html", page: @page, conn: @conn %>
