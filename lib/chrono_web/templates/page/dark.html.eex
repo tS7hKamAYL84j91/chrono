@@ -1,5 +1,5 @@
 <section id="<%= @page.title |> String.replace(" ", "")%>" class="cta-1 bg-dark padding-top-bottom text-center white-text">
-  <div class="container-fluid anima">
+  <div class="container-fluid">
     <%= render "content.html", page: @page, conn: @conn %>
   </div>		
 </section>

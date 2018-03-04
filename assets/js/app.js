@@ -91,18 +91,3 @@ $(function() {
 
 /*-----  End of Core  ------*/
 
-/*=======================================
-=            Counter numbers            =
-=======================================*/
-
-$(function() {
-
-	$('.counter').counterUp({
-			time: 1000
-	});
-
-});
-
-/*-----  End of Counter numbers  ------*/
-
-
