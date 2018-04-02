@@ -30,16 +30,7 @@
       <span class="menu-icon"></span>
     </a>
 
-    <div class="overlay" id="overlay">
-      <nav class="overlay-menu">
-        <ul>
-          <%= for page <- pages(@all_pages) do %>
-            <li><a href="<%="#"<>page.title |> String.replace(" ", "") %>" class="smooth-scroll"><%= page.title%></a></li>
-          <% end %>
-          <li><a href="#contact" class="smooth-scroll">Learn More</a></li>
-        </ul>
-      </nav>
-    </div>
+
 
     <!-- Modal Register Interest -->
     <!--%= render "register_interest.html", conn: @conn%-->

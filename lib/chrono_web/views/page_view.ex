@@ -3,6 +3,8 @@ defmodule ChronoWeb.PageView do
   require Chrono.Either
   require Logger
 
+  def pages(ps), do: ps |> Enum.map(&Map.take(&1, [:title]))
+
   def parse_pages(ps), do: ps |> Enum.map(&parse_content/1)
 
   defp parse_content(cont) do 

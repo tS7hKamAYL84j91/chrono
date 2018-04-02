@@ -1,11 +1,1 @@
-<!--div id="<%= @showcase_img.id %>" class="item m-center">
-  <div class="col-lg-6 col-xl-6 col-xs-6 col-sm-6 col-md-6 col-centered team_columns_item_image">
-    <img class="img-responsive" src=https:<%= @showcase_img.background_img %> alt="<%= @showcase_img.title %>"/>
-    <div class="team_columns_item_caption">
-        <h4><%= @showcase_img.title %></h4>
-        <hr/>
-    </div>
-  </div>
-</div-->
-
 <div id="<%= @showcase_img.id %>" class="item m-center" style="background-image: url(<%= @showcase_img.background_img %>);"></div>
