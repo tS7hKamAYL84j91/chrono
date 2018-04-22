@@ -10,6 +10,7 @@ defmodule Chrono.CMS do
 
   @pages "chronopage"
   @assets "assets"
+  @watches "watch"
 
   @doc """
   returns content of either pages or assets;  get/5 allows for filters, return fns along with a default value to be set.
@@ -36,7 +37,7 @@ defmodule Chrono.CMS do
     end 
   end
 
-
+  def get!(:watches), do: @watches |> Repo.get |> Enum.map(&to_content(:watch, &1))
   def get!(:content), do: @pages |> Repo.get |> Enum.map(&to_content(&1))
   def get!(:assets), do: @assets |> Repo.get
 
@@ -50,6 +51,13 @@ defmodule Chrono.CMS do
     linked_content: entry |> get_in(["fields", "relatedContent"]) |> get_linked_resource}
   end
   
+  defp to_content(:watch, entry) do 
+    entry 
+    |> to_content
+    |> Map.put(:body, entry |> get_in(["fields", "description"]))
+    |> Map.put(:background_img, entry |> Map.get(:fields) |> get_in(["photo", "fields", "file", "url"]))
+  end
+    
   defp to_content(_content_type, entry), do: to_content(entry) |> Map.put(:body, entry |> get_in(["fields", "description"]))
 
   defp get_linked_resource(nil), do: nil

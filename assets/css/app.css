@@ -13,20 +13,6 @@ ol {
 }
 
 
-/*video{
-  position: absolute;
-  min-width: 100%;
-  min-height: 100%;
-  top: 50%;
-  left: 50%;
-  width: auto;
-  height: auto;
-  -webkit-transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(2);
-  -moz-transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(2);
-  transform: translateX(-50%) translateY(-50%) translateZ(-1px) scale(2);
-  z-index: -99
-}*/
-
 video {
   top: 50%;
   left: 50%;
@@ -48,9 +34,6 @@ video {
   -webkit-transition-position: fixed;
   position: fixed;
 }
-
-
-
 
 /* 
  *  Owl Carousel - Animate Plugin
@@ -273,3 +256,46 @@ video {
   position: relative;
   z-index: 1;
 }
+
+/*--product--*/
+
+.product-row {
+  display: flex;
+  display: -webkit-flex;
+  flex-wrap: wrap-reverse;
+}
+
+.product {
+  margin:1px; 
+  padding:10px;
+  height: 99%;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.product-row [class*="col-md"] {
+  padding-bottom: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+img.zoom-img {
+  -webkit-transform: scale(1, 1);
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-duration: 250ms;
+  -moz-transform: scale(1, 1);
+  -moz-transition-timing-function: ease-out;
+  -moz-transition-duration: 250ms;
+  margin: 0 auto;
+}
+.product:hover img.zoom-img{
+  -webkit-transform: scale(1.05);
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transition-duration: 700ms;
+  -moz-transform: scale(1.05);
+  -moz-transition-timing-function: ease-out;
+  -moz-transition-duration: 700ms;
+  overflow: hidden;
+  cursor:pointer;
+}
+/*--product-end--*/

@@ -17,6 +17,7 @@ defmodule ChronoWeb.Router do
     pipe_through :browser 
     get "/", PageController, :index
     post "/contacts", CrmController, :create
+    get "/watches", WatchController, :index
 
   end
 

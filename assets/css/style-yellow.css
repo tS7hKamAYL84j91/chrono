@@ -172,6 +172,7 @@ section {
 @media (max-width: 767px) {
   .half-box-right {
     max-width: 100%;
+    padding-left: 0px;
   }
 }
 /*-----  End of Half box  ------*/

@@ -1,0 +1,9 @@
+<div class="col-md-<%= (12/@watches_per_row) |>trunc  %>">
+  <div class="product bg-shop">
+    <a href="single.html" class="mask"><img class="img-responsive zoom-img" src="https:<%= elem(@watch,0).background_img %>" alt="" /></a>
+    <div class="product-bottom"> 
+      <h3><%= elem(@watch,0).title %></h3>
+      <%= raw(elem(@watch,0).html) %>
+    </div> 
+  </div>   
+</div>
