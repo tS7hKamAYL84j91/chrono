@@ -20,7 +20,7 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css", order: {after: ["chrono.css"]}
+      joinTo: "css/app.css", order: {after: ["watches.css"]}
     },
     templates: {
       joinTo: "js/app.js"
