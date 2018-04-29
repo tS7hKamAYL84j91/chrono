@@ -7,7 +7,7 @@ defmodule ChronoWeb.PageView do
 
   def parse_pages(ps), do: ps |> Enum.map(&parse_content/1)
 
-  defp parse_content(cont) do 
+  def parse_content(cont) do 
     cont 
     |> Map.put(:html, cont.body |> parse_html) 
     |> Map.put(:template, cont |> apply_template)

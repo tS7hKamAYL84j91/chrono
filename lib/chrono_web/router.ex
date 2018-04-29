@@ -15,15 +15,17 @@ defmodule ChronoWeb.Router do
 
   scope "/", ChronoWeb do
     pipe_through :browser 
+    
     get "/", PageController, :index
     post "/contacts", CrmController, :create
     get "/watches", WatchController, :index
+    get "/watches/:watch_id", WatchController, :show
 
   end
 
-  scope "/api", ChronoWeb do
-    pipe_through :api
-    post "/cms", CMSController, :create
-  end
+  #scope "/api", ChronoWeb do
+  #  pipe_through :api
+  #  post "/cms", CMSController, :create
+  #end
 
 end
