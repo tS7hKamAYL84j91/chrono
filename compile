@@ -1,4 +1,4 @@
-brunch build --production
+npm install -g brunch && brunch build --production
 
 cd $phoenix_dir
 
