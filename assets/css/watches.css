@@ -11,7 +11,7 @@
 .product-row.container:after,
 .product-row.row:before,
 .product-row.row:after {
-   content: normal; // IE doesn't support `initial`
+   content: normal;
 }
 /*-- Safari flex bug end --*/
 
