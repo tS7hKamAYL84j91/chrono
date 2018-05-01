@@ -16,7 +16,12 @@
                     <div class="center-vertical">
                         <div class="center-vertical-box">
                             <%= render "content.html", page: @page, conn: @conn %>
-                        </div>
+                            <div class ="row">
+                                <div class="col-xs-6 col-xs-offset-3">
+                                    <input type="button" class="btn btn-block" value="See More Watches" onclick="location.href = '\watches';">
+                                </div>
+                            </div>
+                        </div>                        
                     </div>
                 </div>
             </div> 
