@@ -1,1 +1,0 @@
-<div id="<%= @showcase_img.id %>" class="item m-center" style="background-image: url(<%= @showcase_img.background_img %>);"></div>

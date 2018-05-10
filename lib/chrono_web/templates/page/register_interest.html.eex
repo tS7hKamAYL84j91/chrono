@@ -10,33 +10,39 @@
         <%=if get_flash(@conn, :info) do %><p class="col-md-12 alert alert-success" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
         <%=if get_flash(@conn, :error) do %> <p class="col-md-12 alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
       </div>
-      <div class="row">
-        <form id="contact_form" data-toggle="validator" role="form" class="myform" action="/contacts" method="post">
-          <input name="_csrf_token" type="hidden" value= <%= Phoenix.Controller.get_csrf_token() %> >
-          <input name="_utf8" type="hidden" value="✓"/>
-          <input name="opt_in" type="hidden" value="yes"/>
-          <div class="form-group col-xs-12 col-sm-6 col-md-6">
+      <form id="contact_form" data-toggle="validator" role="form" class="myform" action="/contacts" method="post">
+        <input name="_csrf_token" type="hidden" value= <%= Phoenix.Controller.get_csrf_token() %> >
+        <input name="_utf8" type="hidden" value="✓"/>
+        <input name="opt_in" type="hidden" value="yes"/>
+        <div class="form-row">
+          <div class="form-group col-10 offset-1 col-md-5 offset-md-1">
             <label for="firstname">First Name:</label>
             <input type="firstname" class="form-control" name="firstname" placeholder="given name"  pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your first name" required>
             <div class="help-block with-errors"></div>
           </div>
-          <div class="form-group col-xs-12 col-sm-6 col-md-6">
+          <div class="form-group col-10 offset-1 col-md-5 offset-md-0">
             <label for="lastname">Last Name:</label>
             <input type="lastname" class="form-control" name="lastname" placeholder="family name" pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your last name" required>
             <div class="help-block with-errors"></div>
           </div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-10 offset-1">
             <label for="email">Email address:</label>
             <input type="email" class="form-control" name="email" placeholder="your.email@gmail.com" data-error="Please provide your email address" required>
             <div class="help-block with-errors"></div>
           </div>
-          <div class="form-group col-xs-12 col-sm-12 col-md-12 col-12">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-10 offset-1">
             <div class="g-recaptcha" data-sitekey="<%= recaptcha_key() %>"></div>
           </div>
-          <div class="form-group">
+        </div>
+        <div class="form-row">
+          <div class="form-group col-10 offset-1">
             <button id="submit" type="submit" class="btn btn-store btn-block">Register</button>
           </div>
-        </form> 
-      </div>
+        <div>
+      </form> 
     </div>
 </section>	

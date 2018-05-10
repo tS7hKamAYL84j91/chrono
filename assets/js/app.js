@@ -91,3 +91,19 @@ $(function() {
 
 /*-----  End of Core  ------*/
 
+$('#theModal').on('show.bs.modal', function (e) {
+
+	var button = $(e.relatedTarget);
+	var modal = $(this);
+	window.location.hash = "watches";
+
+	modal.find('.modal-body').load(button.data("remote"));
+
+});
+
+if(window.location.hash == "#watches") { // edited: "open_model" to "#watches"
+	var hash = window.location.hash;
+	$('#theWatches').click();
+}
+
+$('#theModal').on('hide.bs.modal', function(e) { window.location = "/"; }); 

@@ -3,6 +3,13 @@ defmodule ChronoWeb.PageView do
   require Chrono.Either
   require Logger
 
+  def render("cloud.html",  assigns), do: render "container.html", Map.put(assigns, :style, "bg-cloud")
+  def render("dark.html",   assigns), do: render "container.html", Map.put(assigns, :style, "bg-dark white-text")
+  def render("page.html",   assigns), do: render "container.html", Map.put(assigns, :style, "bg-white")
+  def render("shop.html",   assigns), do: render "container.html", Map.put(assigns, :style, "bg-shop")
+  def render("video.html",  assigns), do: render "container.html", Map.put(assigns, :style, :video)
+  
+
   def pages(ps), do: ps |> Enum.map(&Map.take(&1, [:title]))
 
   def parse_pages(ps), do: ps |> Enum.map(&parse_content/1)

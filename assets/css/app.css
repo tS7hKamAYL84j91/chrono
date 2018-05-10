@@ -34,3 +34,19 @@ video {
   position: fixed;
 }
 
+.g-recaptcha {
+  transform: scale(0.80);
+  transform-origin: 0 0;
+}
+
+.showcase-img {
+  max-height:500px;
+}
+
+.carousel-inner img {
+  margin: auto;
+}
+
+.modal-lg {
+  max-width: 89%;
+}

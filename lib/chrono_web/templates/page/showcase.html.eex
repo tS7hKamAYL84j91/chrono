@@ -3,12 +3,16 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6 slider">
-                <div id="as-slider" class="owl-carousel" data-autoplay="4000" data-navigation="false" data-dots="true" data-transition="">
-                    <%= if @page.linked_content != nil do %>
-                        <%=for showcase_img <- @page.linked_content do %>
-                            <%= render "#{showcase_img.template}.html", showcase_img: showcase_img %>
-                        <% end %>
-                    <% end%>
+                <div id="showcase" class="carousel slide" data-ride="carousel" data-interval="4000">
+                    <div class="carousel-inner align-self-center">
+                        <%= if @page.linked_content != nil do %>
+                        <%=for showcase_img <- @page.linked_content |> Enum.with_index do %>
+                            <div class="carousel-item <%= if elem(showcase_img,1) == 0 do %> active <% end %>">
+                            <img class="showcase-img  d-block" src="https:<%= elem(showcase_img,0).background_img %>">
+                            </div>
+                         <% end %>
+                        <% end%>
+                    </div>
                 </div>
             </div> 
             <div class="col-sm-6 bg-shop" style="height:500px;">
@@ -17,8 +21,8 @@
                         <div class="center-vertical-box">
                             <%= render "content.html", page: @page, conn: @conn %>
                             <div class ="row">
-                                <div class="col-xs-6 col-xs-offset-3">
-                                    <input type="button" class="btn btn-block" value="See More Watches" onclick="location.href = '\watches';">
+                                <div class="col-8 offset-2 text-centered">
+                                    <a id="theWatches" class="btn btn-block" data-remote="/watches" data-toggle="modal" data-target="#theModal">See our collection</a>
                                 </div>
                             </div>
                         </div>                        
@@ -29,3 +33,21 @@
     </div>
 </section> 
 <!-- end vertical center / slider -->
+
+<div class="modal fade" id="theModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                ... remote content from "data-remote" loads here ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
