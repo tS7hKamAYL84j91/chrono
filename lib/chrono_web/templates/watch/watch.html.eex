@@ -1,3 +1,13 @@
+<div class="overlay" id="overlay">
+    <nav class="overlay-menu">
+    <ul>
+        <li><a href="/" class="smooth-scroll">Chrono6538</a></li>
+        <li><a href="/watches" class="smooth-scroll">Our Collection</a></li>
+    </ul>
+    </nav>
+</div>
+
+
 <div class="container product-container">
 
   <div class="product bg-clouds">
@@ -71,7 +81,7 @@
   </div>
       <div class="row">
       <div class="col-4 offset-4 text-center">
-         <a href="/#watches" id="theWatches" class="btn btn-block" >Back to the collection</a>
+         <a href="/watches" id="theWatches" class="btn btn-block" >Back to the collection</a>
       </div>
     </div>
 </div>

@@ -15,16 +15,11 @@
 }
 /*-- Safari flex bug end --*/
 
-.product-container {
-  margin-top: 21px;
-  border-radius: 21px;
-}
 
 .product {
   margin: 1px; 
   padding: 21px;
   height: 100%;
-  border-radius: 21px;
   text-align: center;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 5px 21px 0 rgba(0, 0, 0, 0.19);
 }

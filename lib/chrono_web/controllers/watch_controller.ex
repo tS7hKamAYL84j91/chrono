@@ -2,7 +2,7 @@ defmodule ChronoWeb.WatchController do
   use ChronoWeb, :controller
   require Logger
 
-  plug :put_layout, "basic.html"
+  #plug :put_layout, "basic.html"
 
   def index(conn, _params), do: render conn, "watches.html", [watches: Chrono.CMS.get(:watches), watches_per_row: 3]
 
