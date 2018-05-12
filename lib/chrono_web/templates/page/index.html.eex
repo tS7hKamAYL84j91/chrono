@@ -1,6 +1,7 @@
 <div class="overlay" id="overlay">
     <nav class="overlay-menu">
     <ul>
+        <li><a href="/watches" class="smooth-scroll">Our Collection</a></li>
         <%= for page <- pages(@all_pages) do %>
         <li><a href="<%="#"<>page.title |> String.replace(" ", "") %>" class="smooth-scroll"><%= page.title%></a></li>
         <% end %>

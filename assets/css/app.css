@@ -41,12 +41,15 @@ video {
 
 .showcase-img {
   max-height:500px;
-}
-
-.carousel-inner img {
   margin: auto;
 }
 
-.modal-lg {
-  max-width: 89%;
+@media (max-width: 767px) {
+  .showcase-img {
+    margin-top: auto;
+    max-width: 89%; 
+  }
+  .slider {
+    height: auto!important;
+  }
 }

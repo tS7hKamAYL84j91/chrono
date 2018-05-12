@@ -8,7 +8,7 @@
                         <%= if @page.linked_content != nil do %>
                         <%=for showcase_img <- @page.linked_content |> Enum.with_index do %>
                             <div class="carousel-item <%= if elem(showcase_img,1) == 0 do %> active <% end %>">
-                            <img class="showcase-img  d-block" src="https:<%= elem(showcase_img,0).background_img %>">
+                            <img class="showcase-img mx-auto d-block" src="https:<%= elem(showcase_img,0).background_img %>">
                             </div>
                          <% end %>
                         <% end%>
