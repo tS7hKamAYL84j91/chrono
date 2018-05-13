@@ -5,7 +5,7 @@ defmodule Chrono.Mixfile do
     [
       app: :chrono,
       version: "0.0.2",
-      elixir: "~> 1.6",
+      elixir: "~> 1.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
