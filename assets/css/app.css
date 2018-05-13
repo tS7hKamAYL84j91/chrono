@@ -46,7 +46,6 @@ video {
 
 @media (max-width: 767px) {
   .showcase-img {
-    margin-top: auto;
     max-width: 89%; 
   }
   .slider {

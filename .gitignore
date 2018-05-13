@@ -33,3 +33,4 @@ npm-debug.log
 *.dump
 *.tar.gz
 app.yaml
+.elixir_ls

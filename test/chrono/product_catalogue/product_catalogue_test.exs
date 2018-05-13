@@ -30,7 +30,8 @@ defmodule Chrono.ProductCatalogueTest do
     end
 
     test "create_pricing_plan/1 with valid data creates a pricing_plan" do
-      assert {:ok, %PricingPlan{} = pricing_plan} = ProductCatalogue.create_pricing_plan(@valid_attrs)
+      assert {:ok, %PricingPlan{} = pricing_plan} =
+               ProductCatalogue.create_pricing_plan(@valid_attrs)
     end
 
     test "create_pricing_plan/1 with invalid data returns error changeset" do
@@ -39,20 +40,29 @@ defmodule Chrono.ProductCatalogueTest do
 
     test "update_pricing_plan/2 with valid data updates the pricing_plan" do
       pricing_plan = pricing_plan_fixture()
-      assert {:ok, pricing_plan} = ProductCatalogue.update_pricing_plan(pricing_plan, @update_attrs)
+
+      assert {:ok, pricing_plan} =
+               ProductCatalogue.update_pricing_plan(pricing_plan, @update_attrs)
+
       assert %PricingPlan{} = pricing_plan
     end
 
     test "update_pricing_plan/2 with invalid data returns error changeset" do
       pricing_plan = pricing_plan_fixture()
-      assert {:error, %Ecto.Changeset{}} = ProductCatalogue.update_pricing_plan(pricing_plan, @invalid_attrs)
+
+      assert {:error, %Ecto.Changeset{}} =
+               ProductCatalogue.update_pricing_plan(pricing_plan, @invalid_attrs)
+
       assert pricing_plan == ProductCatalogue.get_pricing_plan!(pricing_plan.id)
     end
 
     test "delete_pricing_plan/1 deletes the pricing_plan" do
       pricing_plan = pricing_plan_fixture()
       assert {:ok, %PricingPlan{}} = ProductCatalogue.delete_pricing_plan(pricing_plan)
-      assert_raise Ecto.NoResultsError, fn -> ProductCatalogue.get_pricing_plan!(pricing_plan.id) end
+
+      assert_raise Ecto.NoResultsError, fn ->
+        ProductCatalogue.get_pricing_plan!(pricing_plan.id)
+      end
     end
 
     test "change_pricing_plan/1 returns a pricing_plan changeset" do

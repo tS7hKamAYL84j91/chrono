@@ -2,9 +2,9 @@ defmodule Chrono.Either do
   defmacro either(expression) do
     quote do
       try do
-        {:ok,unquote(expression)}
+        {:ok, unquote(expression)}
       rescue
-        e -> {:error,e}
+        e -> {:error, e}
       end
     end
   end

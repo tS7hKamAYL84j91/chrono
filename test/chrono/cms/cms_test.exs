@@ -4,10 +4,8 @@ defmodule Chrono.CMSTest do
   alias Chrono.CMS
 
   describe "content" do
-    
     test "tautology" do
       assert true
     end
-
   end
 end

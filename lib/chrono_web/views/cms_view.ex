@@ -4,5 +4,4 @@ defmodule ChronoWeb.CMSView do
   def render("create.json", %{headers: _headers}) do
     %{status: "201 Created"}
   end
-
 end

@@ -27,11 +27,8 @@ config :chrono, Chrono.CMS.Repo,
   contentful_key: System.get_env("CONTENTFUL_KEY"),
   contentful_space: System.get_env("CONTENTFUL_SPACE")
 
-config :goth, json: System.get_env("GOTH") |> Base.decode64!
+config :goth, json: System.get_env("GOTH") |> Base.decode64!()
 
-config :chrono, 
+config :chrono,
   gss_id: System.get_env("SPREADSHEET_ID"),
-  recaptcha_secret: System.get_env("RECAPTCHA_SECRET") 
-
-
-
+  recaptcha_secret: System.get_env("RECAPTCHA_SECRET")

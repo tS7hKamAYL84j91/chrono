@@ -18,10 +18,15 @@
 
 .product {
   margin: 1px; 
+  border-radius: 21px;
   padding: 21px;
   height: 100%;
   text-align: center;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.2), 0 5px 21px 0 rgba(0, 0, 0, 0.19);
+}
+
+.product.no_rounding {
+  border-radius: 0px !important;
 }
 
 .product-row [class*="col-md"] {
