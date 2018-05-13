@@ -1,9 +1,11 @@
+<%= with watch <- @watch |> parse_watch do %>
 <div class="col-md-<%= (12/@watches_per_row) |>trunc %> ">
   <div class="product bg-clouds black-text">
-    <a href="<%= Phoenix.Controller.current_path(@conn)  <> "/" <>  @watch.id %>" class="mask"><img class="img-fluid zoom-img product-img" src="https:<%= @watch.background_img %>" alt="" /></a>
+    <a href="<%= Phoenix.Controller.current_path(@conn)  <> "/" <>  watch.id %>" class="mask"><img class="img-fluid zoom-img product-img" src="https:<%= watch.main_img.photo %>" alt="<%= watch.main_img.title %>" /></a>
     <div class="product-bottom"> 
-      <h3><%= @watch.title %></h3>
-      <%= raw(@watch.html) %>
+      <h3><%= watch.title %></h3>
+      <%= raw(watch.html) %>
     </div> 
   </div>   
 </div>
+<% end %>

@@ -15,7 +15,7 @@
 </video>
 
 <div id="wrap">
-    <%=for page <- parse_pages(@all_pages) do %>
+    <%=for page <- ChronoWeb.ViewHelper.ParseContent.parse_content_pages(@all_pages) do %>
         <%= render "#{page.template}.html", page: page, conn: @conn %>
     <% end %>
 </div>

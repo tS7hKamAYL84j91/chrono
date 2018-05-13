@@ -8,11 +8,11 @@
 
 <div id="wrap" class="container bg-shop">
   <div class="row-header">
-    <%= render ChronoWeb.PageView, "content.html", conn: @conn, page: ChronoWeb.WatchView.the_watches %>
+    <%= render ChronoWeb.PageView, "content.html", conn: @conn, page: @the_watches |> parse_result %>
   </div>
 
   <div class="row product-row">
-  <%=for watch <- ChronoWeb.PageView.parse_pages(@watches) |> Enum.with_index do %>
+  <%=for watch <- @watches |> Enum.with_index do %>
     <%= if rem(elem(watch,1),@watches_per_row) == 0 && elem(watch,1) > 0 do %>
         <div class="w-100"></div>
     <% end %>
