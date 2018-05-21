@@ -2,8 +2,8 @@
     <div class="container-fluid">
       <div class="row header">
         <div class="col-md-12">
-          <h2>Learn more</h2>
-          <p>If your interested in learning more about Chrono6538 fill in your details below</p>
+          <h2>Join our Beta</h2>
+          <p>If your interested in joining Chrono6538, fill in your details</p>
         </div>
       </div>
       <div class="row">
@@ -17,12 +17,12 @@
         <div class="form-row">
           <div class="form-group col-10 offset-1 col-md-5 offset-md-1">
             <label for="firstname">First Name:</label>
-            <input type="firstname" class="form-control" name="firstname" placeholder="given name"  pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your first name" required>
+            <input type="firstname" class="form-control" name="firstname" placeholder="first name"  pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your first name" required>
             <div class="help-block with-errors"></div>
           </div>
           <div class="form-group col-10 offset-1 col-md-5 offset-md-0">
             <label for="lastname">Last Name:</label>
-            <input type="lastname" class="form-control" name="lastname" placeholder="family name" pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your last name" required>
+            <input type="lastname" class="form-control" name="lastname" placeholder="last name" pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your last name" required>
             <div class="help-block with-errors"></div>
           </div>
         </div>
@@ -35,6 +35,7 @@
         </div>
         <div class="form-row">
           <div class="form-group col-10 offset-1">
+            <label for="email">Prove humanity:</label>
             <div class="g-recaptcha" data-sitekey="<%= recaptcha_key() %>"></div>
           </div>
         </div>
