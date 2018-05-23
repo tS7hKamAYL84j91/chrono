@@ -27,7 +27,7 @@ config :chrono, Chrono.CMS.Repo,
   contentful_key: System.get_env("CONTENTFUL_KEY"),
   contentful_space: System.get_env("CONTENTFUL_SPACE"),
   medium_url: System.get_env("MEDIUM_URL") |> Base.decode64!(),
-  default_posts: System.get_env("MEDIUM_NUM_POSTS")
+  default_posts: System.get_env("MEDIUM_NUM_POSTS") |> String.to_integer
 
 config :goth, json: System.get_env("GOTH") |> Base.decode64!()
 
