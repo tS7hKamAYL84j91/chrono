@@ -25,7 +25,9 @@ config :logger, level: :debug
 
 config :chrono, Chrono.CMS.Repo,
   contentful_key: System.get_env("CONTENTFUL_KEY"),
-  contentful_space: System.get_env("CONTENTFUL_SPACE")
+  contentful_space: System.get_env("CONTENTFUL_SPACE"),
+  medium_url: System.get_env("MEDIUM_URL"),
+  default_posts: System.get_env("MEDIUM_NUM_POSTS")
 
 config :goth, json: System.get_env("GOTH") |> Base.decode64!()
 

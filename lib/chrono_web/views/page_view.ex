@@ -18,6 +18,9 @@ defmodule ChronoWeb.PageView do
   def render("video.html", assigns),
     do: render("container.html", Map.put(assigns, :style, :video))
 
+  def render("blog.html", assigns),
+    do: render("container.html", assigns |> Map.put(:style, :video) |> Map.put(:blog, true))
+
   def pages(ps), do: ps |> Enum.map(&Map.take(&1, [:title]))
 
   def recaptcha_key, do: :chrono |> Application.get_env(:recaptcha_key)

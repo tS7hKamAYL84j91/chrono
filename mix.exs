@@ -43,7 +43,8 @@ defmodule Chrono.Mixfile do
       {:distillery, "~> 1.4", runtime: false},
       {:mix_docker, "~> 0.5.0"},
       {:vex, "~> 0.6.0"},
-      {:elixir_google_spreadsheets, "~> 0.1.8"}
+      {:elixir_google_spreadsheets, "~> 0.1.8"},
+      {:fiet, "~> 0.2.1"}
     ]
   end
 end

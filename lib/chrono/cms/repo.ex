@@ -7,6 +7,9 @@ defmodule Chrono.CMS.Repo do
   require Chrono.Either
   require Logger
 
+  @default_medium_url "http://localhost"
+  @default_number_of_blogs 3
+
   # Client API
 
   @doc """
@@ -85,7 +88,7 @@ defmodule Chrono.CMS.Repo do
     do:
       retrieve_data(:content_types)
       |> Enum.map(&{:entries, &1 |> get_in(["sys", "id"])})
-      |> (&%{state | subs: [:assets | &1]}).()
+      |> (&%{state | subs: [:blog_posts, :assets | &1]}).()
 
   defp retrieve_data(type, default \\ []) do
     with {:ok, result} when result != nil <- type |> retrieve_data! |> Chrono.Either.either() do
@@ -105,6 +108,21 @@ defmodule Chrono.CMS.Repo do
   defp retrieve_data!(:content_types), do: Delivery.content_types(space(), key())
   defp retrieve_data!(:assets), do: {:assets, Delivery.assets(space(), key())}
 
+  defp retrieve_data!(:blog_posts) do
+    Logger.debug("#{inspect(__MODULE__)}: GET; #{medium_url()}")
+
+    with {:ok, resp} <- HTTPoison.get(medium_url()),
+         {:ok, rss} when rss != nil <- resp |> Map.get(:body) |> Chrono.Either.either(),
+         {:ok, %Fiet.Feed{items: items}} <- Fiet.parse(rss) do
+      {:blog_posts, items |> Enum.take(number_of_blogs() |> IO.inspect())}
+    else
+      e ->
+        Logger.warn(
+          "#{inspect(__MODULE__)}: Danger Will Robinson blog retrieval failed; #{inspect(e)} "
+        )
+    end
+  end
+
   defp retrieve_data!({:entries, content_type}),
     do:
       {content_type |> String.to_atom(),
@@ -115,4 +133,8 @@ defmodule Chrono.CMS.Repo do
   defp schedule, do: repo_config() |> Keyword.get(:schedule, nil)
   defp key, do: repo_config() |> Keyword.get(:contentful_key, nil)
   defp space, do: repo_config() |> Keyword.get(:contentful_space, nil)
+
+  defp medium_url, do: repo_config() |> Keyword.get(:medium_url, @default_medium_url)
+
+  defp number_of_blogs, do: repo_config() |> Keyword.get(:default_posts, @default_number_of_blogs)
 end

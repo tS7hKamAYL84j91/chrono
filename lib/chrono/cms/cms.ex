@@ -11,6 +11,7 @@ defmodule Chrono.CMS do
   @pages "chronopage"
   @assets "assets"
   @watches "watch"
+  @blog_posts "blog_posts"
 
   @doc """
   returns content of either pages or assets;  get/5 allows for filters, return fns along with a default value to be set.
@@ -43,6 +44,7 @@ defmodule Chrono.CMS do
   def get!(:watches), do: @watches |> Repo.get() |> Enum.map(&to_content(:watch, &1))
   def get!(:content), do: @pages |> Repo.get() |> Enum.map(&to_content(&1))
   def get!(:assets), do: @assets |> Repo.get()
+  def get!(:blog_posts), do: @blog_posts |> Repo.get() |> Enum.map(&to_content(:blog_post, &1))
 
   defp to_content(entry) do
     %Content{
@@ -64,6 +66,15 @@ defmodule Chrono.CMS do
       :background_img,
       entry |> Map.get(:fields) |> get_in(["photo", "fields", "file", "url"])
     )
+  end
+
+  defp to_content(:blog_post, entry) do
+    %Content{
+      id: entry |> Map.get(:id),
+      title: entry |> Map.get(:title),
+      body: entry |> Map.get(:description),
+      fields: entry |> Map.from_struct()
+    }
   end
 
   defp to_content(_content_type, entry),

@@ -7,4 +7,13 @@
     <div class="col-8 offset-2 text-center">
         <%=raw(@page.html) %>
     </div>
+    <%= if assigns[:blog] do  %>
+    <%= for post <- @blog_posts do %>
+    <div class="col-8 offset-2 text-center">
+        <a href="<%= post.id %>">
+        <h5><%= "#{post.title} - #{post.fields[:published_at] |> String.replace(~r/ [0-9]{2}:[0-9]{2}:[0-9]{2} GMT/,"")}"%></h5></a>
+    </div>
+    <% end%>
+    <% end %>
+
 </div>

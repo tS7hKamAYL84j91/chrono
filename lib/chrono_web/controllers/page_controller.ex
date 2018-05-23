@@ -6,7 +6,8 @@ defmodule ChronoWeb.PageController do
       conn,
       "index.html",
       all_pages: [] |> all_pages,
-      background_img: background_img()
+      background_img: background_img(),
+      blog_posts: Chrono.CMS.get(:blog_posts)
     )
   end
 

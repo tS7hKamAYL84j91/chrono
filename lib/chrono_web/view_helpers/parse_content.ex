@@ -37,7 +37,8 @@ defmodule ChronoWeb.ViewHelper.ParseContent do
   defp default_template(t, _), do: t
 
   defp format_photo(%{:sys => %{"contentType" => %{"sys" => %{"id" => "watch"}}}} = cont),
-    do: cont |> Map.from_struct() |> get_in([:fields, "photo", "fields", "file", "url"])  
+    do: cont |> Map.from_struct() |> get_in([:fields, "photo", "fields", "file", "url"])
+
   defp format_photo(cont), do: cont.background_img
 
   defp linked_content(%Chrono.CMS.Content{linked_content: nil}), do: nil

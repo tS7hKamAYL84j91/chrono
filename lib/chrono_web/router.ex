@@ -21,9 +21,4 @@ defmodule ChronoWeb.Router do
     get("/watches", WatchController, :index)
     get("/watches/:watch_id", WatchController, :show)
   end
-
-  # scope "/api", ChronoWeb do
-  #  pipe_through :api
-  #  post "/cms", CMSController, :create
-  # end
 end

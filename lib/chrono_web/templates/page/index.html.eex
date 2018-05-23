@@ -16,7 +16,7 @@
 
 <div id="wrap">
     <%=for page <- ChronoWeb.ViewHelper.ParseContent.parse_content_pages(@all_pages) do %>
-        <%= render "#{page.template}.html", page: page, conn: @conn %>
+        <%= render "#{page.template}.html", page: page, conn: @conn, blog_posts: @blog_posts %>
     <% end %>
 </div>
 
