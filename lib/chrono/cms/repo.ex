@@ -114,7 +114,7 @@ defmodule Chrono.CMS.Repo do
     with {:ok, resp} <- HTTPoison.get(medium_url()),
          {:ok, rss} when rss != nil <- resp |> Map.get(:body) |> Chrono.Either.either(),
          {:ok, %Fiet.Feed{items: items}} <- Fiet.parse(rss) do
-      {:blog_posts, items |> Enum.take(number_of_blogs() |> IO.inspect())}
+      {:blog_posts, items |> Enum.take(number_of_blogs())}
     else
       e ->
         Logger.warn(
