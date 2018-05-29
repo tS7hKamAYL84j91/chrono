@@ -37,7 +37,7 @@
 
 .product-img {
   margin: 0 auto;
-  border-radius: 21px;  
+  border-radius: 21px !important;  
   display: block;
   width: auto;
   height: 13em;
