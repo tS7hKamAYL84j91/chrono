@@ -25,12 +25,6 @@ config :chrono, Chrono.CMS.Repo,
 
 config :mix_docker, image: "jimandsalbrownmsncom/chrono"
 
-config :elixir_google_spreadsheets, :client,
-  request_workers: 50,
-  max_demand: 100,
-  max_interval: :timer.minutes(1),
-  interval: 100
-
 config :chrono,
   recaptcha_key: "6LeIJzwUAAAAACawWIxhl8za50WcvsaHR0-v-qOH",
   recaptcha_url: "https://www.google.com/recaptcha/api/siteverify"

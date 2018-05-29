@@ -47,7 +47,7 @@
 .product-img.d-block  {
     height: auto;
     max-height: 21em;
-    object-fit: contain;
+    object-fit: cover;
   }
 
 .product-table {

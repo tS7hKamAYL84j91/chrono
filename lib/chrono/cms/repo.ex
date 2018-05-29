@@ -109,7 +109,7 @@ defmodule Chrono.CMS.Repo do
   defp retrieve_data!(:assets), do: {:assets, Delivery.assets(space(), key())}
 
   defp retrieve_data!(:blog_posts) do
-    Logger.debug("#{inspect(__MODULE__)}: GET; #{medium_url()}")
+    Logger.debug("GET; #{medium_url()}")
 
     with {:ok, resp} <- HTTPoison.get(medium_url()),
          {:ok, rss} when rss != nil <- resp |> Map.get(:body) |> Chrono.Either.either(),

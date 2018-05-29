@@ -29,8 +29,3 @@ config :chrono, Chrono.CMS.Repo,
   medium_url: System.get_env("MEDIUM_URL") |> Base.decode64!(),
   default_posts: System.get_env("MEDIUM_NUM_POSTS") |> String.to_integer
 
-config :goth, json: System.get_env("GOTH") |> Base.decode64!()
-
-config :chrono,
-  gss_id: System.get_env("SPREADSHEET_ID"),
-  recaptcha_secret: System.get_env("RECAPTCHA_SECRET")

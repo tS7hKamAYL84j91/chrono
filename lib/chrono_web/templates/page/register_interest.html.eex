@@ -1,49 +1,45 @@
 <section id="contact" class="bg-clouds padding-top-bottom">
-    <div class="container-fluid">
-      <div class="row header">
-        <div class="col-md-12">
-          <h2>Join our Beta</h2>
-          <p>If your interested in joining Chrono6538, fill in your details</p>
-        </div>
+  <div class="container-fluid">
+    <div class="row header">
+      <div class="col-md-12">
+        <h2>Join our Beta</h2>
+        <h3>If your interested in joining Chrono6538, fill in your details</h3>
       </div>
-      <div class="row">
-        <%=if get_flash(@conn, :info) do %><p class="col-md-12 alert alert-success" role="alert"><%= get_flash(@conn, :info) %></p><% end %>
-        <%=if get_flash(@conn, :error) do %> <p class="col-md-12 alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p><% end %>
-      </div>
-      <form id="contact_form" data-toggle="validator" role="form" class="myform" action="/contacts" method="post">
-        <input name="_csrf_token" type="hidden" value= <%= Phoenix.Controller.get_csrf_token() %> >
-        <input name="_utf8" type="hidden" value="✓"/>
-        <input name="opt_in" type="hidden" value="yes"/>
-        <div class="form-row">
-          <div class="form-group col-10 offset-1 col-md-5 offset-md-1">
-            <label for="firstname">First Name:</label>
-            <input type="firstname" class="form-control" name="firstname" placeholder="first name"  pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your first name" required>
-            <div class="help-block with-errors"></div>
-          </div>
-          <div class="form-group col-10 offset-1 col-md-5 offset-md-0">
-            <label for="lastname">Last Name:</label>
-            <input type="lastname" class="form-control" name="lastname" placeholder="last name" pattern="^[a-zA-Z ,.'-]+$" data-error="Please provide your last name" required>
-            <div class="help-block with-errors"></div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-10 offset-1">
-            <label for="email">Email address:</label>
-            <input type="email" class="form-control" name="email" placeholder="your.email@gmail.com" data-error="Please provide your email address" required>
-            <div class="help-block with-errors"></div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-10 offset-1">
-            <label for="email">Prove humanity:</label>
-            <div class="g-recaptcha" data-sitekey="<%= recaptcha_key() %>"></div>
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-10 offset-1">
-            <button id="submit" type="submit" class="btn btn-store btn-block">Register</button>
-          </div>
-        <div>
-      </form> 
     </div>
-</section>	
+  </div>
+<!-- Begin MailChimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/classic-10_7.css" rel="stylesheet" type="text/css">
+<div id="mc_embed_signup">
+  <form action="https://heroku.us18.list-manage.com/subscribe/post?u=75f0e1b17c07ee0cb264f76b2&amp;id=0ab9eba0eb" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+    <div id="mc_embed_signup_scroll">
+      <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+      <div class="mc-field-group">
+        <label for="mce-EMAIL">Email Address  <span class="asterisk">*</span></label>
+        <input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL">
+      </div>
+      <div class="mc-field-group">
+        <label for="mce-FNAME">First Name </label>
+        <input type="text" value="" name="FNAME" class="" id="mce-FNAME">
+      </div>
+      <div class="mc-field-group">
+        <label for="mce-LNAME">Last Name </label>
+        <input type="text" value="" name="LNAME" class="" id="mce-LNAME">
+      </div>
+      <div id="mce-responses" class="clear">
+        <div class="response" id="mce-error-response" style="display:none"></div>
+        <div class="response" id="mce-success-response" style="display:none"></div>
+      </div>    
+      <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+      <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_75f0e1b17c07ee0cb264f76b2_0ab9eba0eb" tabindex="-1" value=""></div>
+      <div class="row">
+        <div class="col-4 offset-4">
+          <div class="clear"><input type="submit" value="Register" name="subscribe" id="mc-embedded-subscribe" class="button text-center"></div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+  <script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script><script type='text/javascript'>(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';fnames[3]='ADDRESS';ftypes[3]='address';fnames[4]='PHONE';ftypes[4]='phone';fnames[5]='BIRTHDAY';ftypes[5]='birthday';}(jQuery));var $mcj = jQuery.noConflict(true);</script>
+  <!--End mc_embed_signup-->
+</section>
+

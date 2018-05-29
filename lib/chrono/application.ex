@@ -12,8 +12,7 @@ defmodule Chrono.Application do
       supervisor(ChronoWeb.Endpoint, []),
       # Start your own worker by calling: Chrono.Worker.start_link(arg1, arg2, arg3)
       # worker(Chrono.Worker, [arg1, arg2, arg3]),
-      worker(Chrono.CMS.Repo, []),
-      worker(GSS.Spreadsheet, [Application.get_env(:chrono, :gss_id), [name: :gss_event_store]])
+      worker(Chrono.CMS.Repo, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

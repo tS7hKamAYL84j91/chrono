@@ -52,3 +52,22 @@ video {
     height: auto!important;
   }
 }
+
+#mc_embed_signup .mc-field-group input {
+  border-radius: 21px !important;
+  
+}
+
+#mc_embed_signup .button {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  border-radius: 21px !important;
+  font-size: 144% !important;
+  height: 2em !important;
+}
+
+@media only screen and (max-width: 768px) {
+  #mc_embed_signup .button {
+  font-size: 100% !important;
+  }
+}
