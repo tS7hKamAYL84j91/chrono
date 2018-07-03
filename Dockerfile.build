@@ -5,7 +5,7 @@ ENV HOME=/opt/app/ TERM=xterm
 RUN mix local.hex --force && \
     mix local.rebar --force
 WORKDIR /opt/app
-ENV MIX_ENV=prod REPLACE_OS_VARS=true PORT=8000
+ENV MIX_ENV=container REPLACE_OS_VARS=true PORT=8000
 # Cache elixir deps
 COPY mix.exs mix.lock ./
 RUN mix deps.get
